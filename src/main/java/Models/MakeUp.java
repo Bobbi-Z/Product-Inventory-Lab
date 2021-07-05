@@ -32,4 +32,8 @@ public class MakeUp {
     public String getBrand() {
         return brand;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
