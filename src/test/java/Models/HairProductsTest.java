@@ -54,4 +54,13 @@ public class HairProductsTest {
         String actual = hairProducts.getTypeOfHair();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testQty(){
+        HairProducts hairProducts = new HairProducts();
+        Integer expected = 100;
+        hairProducts.setQty(expected);
+        Integer actual = hairProducts.getQty();
+        Assertions.assertEquals(expected, actual);
+    }
 }
