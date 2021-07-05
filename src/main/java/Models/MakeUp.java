@@ -12,4 +12,8 @@ public class MakeUp {
     public void setSku(Integer sku) {
         this.sku = sku;
     }
+
+    public Integer getSku() {
+        return sku;
+    }
 }
