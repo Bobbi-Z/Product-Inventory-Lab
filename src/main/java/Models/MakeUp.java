@@ -16,4 +16,8 @@ public class MakeUp {
     public Integer getSku() {
         return sku;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
