@@ -53,7 +53,7 @@ public class MakeUpTest {
     }
 
     @Test
-    public void testQty(){
+    public void testSetQty(){
         MakeUp makeUp = new MakeUp();
         Integer expected = 100;
         makeUp.setQty(expected);
@@ -61,5 +61,12 @@ public class MakeUpTest {
         Assertions.assertEquals(expected, actual);
     }
 
-
+    @Test
+    public void testSetPrice(){
+        MakeUp makeUp = new MakeUp();
+        Double expected = 29.50;
+        makeUp.setPrice(expected);
+        Double actual = makeUp.getPrice();
+        Assertions.assertEquals(expected, actual);
+    }
 }
