@@ -40,4 +40,8 @@ public class MakeUp {
     public String getType() {
         return type;
     }
+
+    public void setSectionOfFace(String sectionOfFace) {
+        this.sectionOfFace = sectionOfFace;
+    }
 }
