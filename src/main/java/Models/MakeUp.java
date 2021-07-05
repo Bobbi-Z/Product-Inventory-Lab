@@ -48,4 +48,8 @@ public class MakeUp {
     public String getSectionOfFace() {
         return sectionOfFace;
     }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
 }
