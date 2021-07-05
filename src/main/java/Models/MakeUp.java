@@ -24,4 +24,8 @@ public class MakeUp {
     public String getName() {
         return name;
     }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 }
