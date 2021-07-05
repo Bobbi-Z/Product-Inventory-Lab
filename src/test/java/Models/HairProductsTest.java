@@ -73,4 +73,28 @@ public class HairProductsTest {
         Double actual = hairProducts.getPrice();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testConstructor(){
+        int expectedSku = 123456;
+        String expectedName = "Clean & Pure Nourishing Detox Shampoo";
+        String expectedBrand = "Nexxus";
+        String expectedUse = "Shampoo";
+        String expectedTypeOfHair = "1A, 1B, 1C, 2A, 2B, 2c";
+        int expectedQty = 100;
+        double expectedPrice = 13.99;
+
+        HairProducts testHairProducts = new HairProducts(expectedSku, expectedName,
+                    expectedBrand, expectedUse, expectedTypeOfHair,
+                    expectedQty, expectedPrice);
+
+        Assertions.assertEquals(expectedSku, testHairProducts.getSku());
+        Assertions.assertEquals(expectedName, testHairProducts.getName());
+        Assertions.assertEquals(expectedBrand, testHairProducts.getBrand());
+        Assertions.assertEquals(expectedUse, testHairProducts.getUse());
+        Assertions.assertEquals(expectedTypeOfHair, testHairProducts.getTypeOfHair());
+        Assertions.assertEquals(expectedQty, testHairProducts.getQty());
+        Assertions.assertEquals(expectedPrice, testHairProducts.getPrice());
+
+    }
 }
