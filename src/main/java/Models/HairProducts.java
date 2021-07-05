@@ -9,6 +9,21 @@ public class HairProducts {
     private int qty;
     private double price;
 
+    public HairProducts() {
+
+    }
+
+    public HairProducts(int sku, String name, String brand, String use,
+                        String typeOfHair, int qty, double price) {
+    setSku(sku);
+    setName(name);
+    setBrand(brand);
+    setUse(use);
+    setTypeOfHair(typeOfHair);
+    setQty(qty);
+    setPrice(price);
+    }
+
     public void setSku(Integer sku) {
     this.sku = sku;
     }
