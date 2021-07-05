@@ -44,4 +44,8 @@ public class HairProducts {
     public void setTypeOfHair(String typeOfHair) {
         this.typeOfHair = typeOfHair;
     }
+
+    public String getTypeOfHair() {
+        return typeOfHair;
+    }
 }
