@@ -9,6 +9,21 @@ public class MakeUp {
     private int qty;
     private double price;
 
+    public MakeUp() {
+    }
+
+    public MakeUp(int sku, String name, String brand, String type,
+                  String sectionOfFace, int qty, double price) {
+    setSku(sku);
+    setName(name);
+    setBrand(brand);
+    setType(type);
+    setSectionOfFace(sectionOfFace);
+    setQty(qty);
+    setPrice(price);
+    }
+
+
     public void setSku(Integer sku) {
         this.sku = sku;
     }

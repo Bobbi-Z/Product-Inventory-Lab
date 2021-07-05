@@ -8,6 +8,29 @@ public class MakeUpTest {
     private MakeUp makeUp;
 
     @Test
+    public void testConstructor(){
+        int expectedSku = 654321;
+        String expectedName = "Eaze Drop Blurring Skin Tint";
+        String expectedBrand = "Fenty Beauty";
+        String expectedType = "Foundation";
+        String expectedSectionOfFace = "Whole face";
+        int expectedQty = 100;
+        double expectedPrice = 29.50;
+
+        MakeUp testMakeUp = new MakeUp(expectedSku, expectedName, expectedBrand,
+                expectedType, expectedSectionOfFace, expectedQty, expectedPrice);
+
+        Assertions.assertEquals(expectedSku, testMakeUp.getSku());
+        Assertions.assertEquals(expectedName, testMakeUp.getName());
+        Assertions.assertEquals(expectedBrand, testMakeUp.getBrand());
+        Assertions.assertEquals(expectedType, testMakeUp.getType());
+        Assertions.assertEquals(expectedSectionOfFace, testMakeUp.getSectionOfFace());
+        Assertions.assertEquals(expectedQty, testMakeUp.getQty());
+        Assertions.assertEquals(expectedPrice, testMakeUp.getPrice());
+
+    }
+
+    @Test
     public void testSetSku(){
         MakeUp makeUp = new MakeUp();
         Integer expected = 654321;
