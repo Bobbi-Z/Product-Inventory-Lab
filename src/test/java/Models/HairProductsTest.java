@@ -69,7 +69,7 @@ public class HairProductsTest {
         HairProducts hairProducts = new HairProducts();
         Double expected = 13.99;
         hairProducts.setPrice(expected);
-        Integer actual = hairProducts.getPrice();
+        Double actual = hairProducts.getPrice();
         Assertions.assertEquals(expected, actual);
     }
 }

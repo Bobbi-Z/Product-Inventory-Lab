@@ -60,4 +60,8 @@ public class HairProducts {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public Double getPrice() {
+        return price;
+    }
 }
