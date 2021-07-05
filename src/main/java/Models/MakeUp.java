@@ -44,4 +44,8 @@ public class MakeUp {
     public void setSectionOfFace(String sectionOfFace) {
         this.sectionOfFace = sectionOfFace;
     }
+
+    public String getSectionOfFace() {
+        return sectionOfFace;
+    }
 }
