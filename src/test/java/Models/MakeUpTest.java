@@ -43,5 +43,14 @@ public class MakeUpTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSetSectionOfFace(){
+        MakeUp makeUp = new MakeUp();
+        String expected = "Whole face";
+        makeUp.setSectionOfFace(expected);
+        String actual= makeUp.getSectionOfFace();
+        Assertions.assertEquals(expected, actual);
+    }
+
 
 }
