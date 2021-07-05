@@ -24,4 +24,20 @@ public class HairProducts {
     public String getName() {
         return name;
     }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setUse(String use) {
+        this.use = use;
+    }
+
+    public String getUse() {
+        return use;
+    }
 }

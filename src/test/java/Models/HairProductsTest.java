@@ -27,4 +27,22 @@ public class HairProductsTest {
         String actual = hairProducts.getName();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testSetBrand(){
+        HairProducts hairProducts = new HairProducts();
+        String expected = "Nexxus";
+        hairProducts.setBrand(expected);
+        String actual = hairProducts.getBrand();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testUse(){
+        HairProducts hairProducts = new HairProducts();
+        String expected = "Shampoo";
+        hairProducts.setUse(expected);
+        String actual = hairProducts.getUse();
+        Assertions.assertEquals(expected, actual);
+    }
 }
