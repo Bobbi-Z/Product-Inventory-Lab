@@ -19,6 +19,7 @@ public class HairProductsTest {
         Assertions.assertEquals(expected, actual);
         //then
     }
+
     @Test
     public void testSetName(){
         HairProducts hairProducts = new HairProducts();
