@@ -38,7 +38,7 @@ public class HairProductsTest {
     }
 
     @Test
-    public void testUse(){
+    public void testSetUse(){
         HairProducts hairProducts = new HairProducts();
         String expected = "Shampoo";
         hairProducts.setUse(expected);
@@ -47,7 +47,7 @@ public class HairProductsTest {
     }
 
     @Test
-    public void testTypeOfHair(){
+    public void testSetTypeOfHair(){
         HairProducts hairProducts = new HairProducts();
         String expected = "1A, 1B, 1C, 2A, 2B, 2C,";
         hairProducts.setTypeOfHair(expected);
@@ -56,7 +56,7 @@ public class HairProductsTest {
     }
 
     @Test
-    public void testQty(){
+    public void testSetQty(){
         HairProducts hairProducts = new HairProducts();
         Integer expected = 100;
         hairProducts.setQty(expected);
@@ -65,7 +65,7 @@ public class HairProductsTest {
     }
 
     @Test
-    public void testPrice(){
+    public void testSetPrice(){
         HairProducts hairProducts = new HairProducts();
         Double expected = 13.99;
         hairProducts.setPrice(expected);
