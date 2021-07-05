@@ -25,6 +25,15 @@ public class MakeUpTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSetBrand(){
+        MakeUp makeUp = new MakeUp();
+        String expected = "Fenty Beauty";
+        makeUp.setBrand(expected);
+        String actual = makeUp.getBrand();
+        Assertions.assertEquals(expected, actual);
+    }
+
 
 
 }
