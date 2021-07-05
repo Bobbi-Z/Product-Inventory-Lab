@@ -8,4 +8,8 @@ public class MakeUp {
     private String sectionOfFace;
     private int qty;
     private double price;
+
+    public void setSku(Integer sku) {
+        this.sku = sku;
+    }
 }
