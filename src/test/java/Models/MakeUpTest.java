@@ -34,6 +34,14 @@ public class MakeUpTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSetType(){
+        MakeUp makeUp = new MakeUp();
+        String expected = "Foundation";
+        makeUp.setType(expected);
+        String actual = makeUp.getType();
+        Assertions.assertEquals(expected, actual);
+    }
 
 
 }
