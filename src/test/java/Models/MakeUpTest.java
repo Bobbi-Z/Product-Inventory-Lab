@@ -57,7 +57,7 @@ public class MakeUpTest {
         MakeUp makeUp = new MakeUp();
         Integer expected = 100;
         makeUp.setQty(expected);
-        String actual = makeUp.getQty();
+        Integer actual = makeUp.getQty();
         Assertions.assertEquals(expected, actual);
     }
 
