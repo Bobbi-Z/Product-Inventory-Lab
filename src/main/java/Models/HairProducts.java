@@ -52,4 +52,8 @@ public class HairProducts {
     public void setQty(Integer qty) {
         this.qty = qty;
     }
+
+    public Integer getQty() {
+        return qty;
+    }
 }
