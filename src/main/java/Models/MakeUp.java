@@ -56,4 +56,8 @@ public class MakeUp {
     public Integer getQty() {
         return qty;
     }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }
