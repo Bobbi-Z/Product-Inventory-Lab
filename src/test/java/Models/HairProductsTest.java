@@ -63,4 +63,13 @@ public class HairProductsTest {
         Integer actual = hairProducts.getQty();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testPrice(){
+        HairProducts hairProducts = new HairProducts();
+        Double expected = 13.99;
+        hairProducts.setPrice(expected);
+        Integer actual = hairProducts.getPrice();
+        Assertions.assertEquals(expected, actual);
+    }
 }
