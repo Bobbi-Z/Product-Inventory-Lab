@@ -40,4 +40,8 @@ public class HairProducts {
     public String getUse() {
         return use;
     }
+
+    public void setTypeOfHair(String typeOfHair) {
+        this.typeOfHair = typeOfHair;
+    }
 }
