@@ -48,4 +48,8 @@ public class HairProducts {
     public String getTypeOfHair() {
         return typeOfHair;
     }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
 }
