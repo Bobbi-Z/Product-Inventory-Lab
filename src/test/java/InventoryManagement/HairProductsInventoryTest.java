@@ -1,10 +1,25 @@
 package InventoryManagement;
 
 import Models.HairProducts;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.util.ArrayList;
+
+import static InventoryManagement.HairProductsInventory.inventory;
+
 public class HairProductsInventoryTest {
+
+    private String name;
+    private String brand;
+    private String use;
+    private String typeOfHair;
+    private Integer qty;
+    private Double price;
+    private int sku;
+    private Object HairProducts;
 
     @Test
     public void createTest(){
@@ -37,4 +52,18 @@ public class HairProductsInventoryTest {
         Assertions.assertEquals(expectedPrice, actualPrice);
     }
 
+    @Test
+    void create() {
+    }
+
+    @Test
+    void findHairProductsTest() {
+        Object expectedObject = HairProductsInventory.inventory(name = "Clean & Pure Nourishing Detox Shampoo", brand = "Nexxus",
+               use = "Shampoo", typeOfHair = "1A, 1B, 1C, 2A, 2B, 2c", qty = 100, price =13.99);
+        HairProductsInventory hairProductsInventory = new HairProductsInventory();
+        HairProducts actualObject = HairProductsInventory.inventory.get(sku);
+        Assertions.assertEquals(expectedObject, actualObject);
+
+
+    }
 }
