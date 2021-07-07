@@ -1,6 +1,8 @@
 package Models;
 
-public class HairProducts {
+import InventoryManagement.HairProductsInventory;
+
+public class HairProducts extends HairProductsInventory {
     private int sku;
     private String name;
     private String brand;

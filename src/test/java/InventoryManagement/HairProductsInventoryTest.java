@@ -20,6 +20,7 @@ public class HairProductsInventoryTest {
     private Double price;
     private int sku;
     private Object HairProducts;
+    private HairProductsInventory findHairProductsInventory;
 
     @Test
     public void createTest(){
@@ -31,16 +32,16 @@ public class HairProductsInventoryTest {
         double expectedPrice = 13.99;
 
         HairProductsInventory hairProductsInventory = new HairProductsInventory();
-        HairProducts testHairProducts = HairProductsInventory.create(expectedName,
+        HairProductsInventory testHairProductsInventory = HairProductsInventory.create(expectedName,
                 expectedBrand,expectedUse,expectedTypeOfHair, expectedQty, expectedPrice);
 
-        int actualSku = testHairProducts.getSku();
-        String actualName = testHairProducts.getName();
-        String actualBrand = testHairProducts.getBrand();
-        String actualUse = testHairProducts.getUse();
-        String actualTypeOfHair = testHairProducts.getTypeOfHair();
-        int actualQty = testHairProducts.getQty();
-        double actualPrice = testHairProducts.getPrice();
+        int actualSku = testHairProductsInventory.getSku();
+        String actualName = testHairProductsInventory.getName();
+        String actualBrand = testHairProductsInventory.getBrand();
+        String actualUse = testHairProductsInventory.getUse();
+        String actualTypeOfHair = testHairProductsInventory.getTypeOfHair();
+        int actualQty = testHairProductsInventory.getQty();
+        double actualPrice = testHairProductsInventory.getPrice();
 
         Assertions.assertEquals(Integer.class.getName(),
                 new Integer(actualSku).getClass().getName());
@@ -61,7 +62,7 @@ public class HairProductsInventoryTest {
         Object expectedObject = HairProductsInventory.inventory(name = "Clean & Pure Nourishing Detox Shampoo", brand = "Nexxus",
                use = "Shampoo", typeOfHair = "1A, 1B, 1C, 2A, 2B, 2c", qty = 100, price =13.99);
         HairProductsInventory hairProductsInventory = new HairProductsInventory();
-        HairProducts actualObject = HairProductsInventory.inventory.get(sku);
+        HairProductsInventory actualObject = findHairProductsInventory.inventory.get(sku);
         Assertions.assertEquals(expectedObject, actualObject);
 
 
