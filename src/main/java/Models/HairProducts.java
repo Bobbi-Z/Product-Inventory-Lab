@@ -70,7 +70,7 @@ public class HairProducts extends HairProductsServices {
         this.qty = qty;
     }
 
-    public Integer getQty() {
+    public int getQty() {
         return qty;
     }
 
