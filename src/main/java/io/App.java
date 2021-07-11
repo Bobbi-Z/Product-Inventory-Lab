@@ -51,6 +51,10 @@ public class App {
         switch (choice) {
             case 1:
                 choiceOne();
+                break;
+            case 2:
+                choiceTwo();
+                break;
 
         }
     }
@@ -86,9 +90,10 @@ public class App {
             if (found == null) {
                 System.out.println("This is not a valid sku");
             } else {
-                System.out.println(found);
+                System.out.println(found.toString());
             }
-        }
+            choiceTwo();
+        } //else for makeup & //else for exit
     }
 
 

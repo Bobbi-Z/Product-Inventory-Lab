@@ -81,4 +81,12 @@ public class HairProducts extends HairProductsServices {
     public Double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString(){
+        return "SKU: " + this.getSku() + " Name: " + this.getName() +
+                " Brand: " + this.getBrand() + " Use: " + this.getUse() +
+                " Hair Type: " + this.getTypeOfHair() + " Quantity: " + this.getQty() +
+                " Price: " + this.getPrice();
+}
 }
