@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 public class MakeUpServices {
 
-    private static int nextSku = 1;
+    private static int nextSku = 1500;
 
-    private ArrayList<MakeUp> inventory = new ArrayList<>();
+    public ArrayList<MakeUp> inventory = new ArrayList<>();
 
-    public MakeUp create(String expectedName, String expectedBrand, String expectedType,
-                         String expectedSectionOfFace, int expectedQty, double expectedPrice) {
+    public MakeUp create(String name, String brand, String type,
+                         String color, int qty, double price) {
 
-        MakeUp createdMakeUp = new MakeUp(nextSku++, expectedName, expectedBrand,
-                expectedType, expectedSectionOfFace, expectedQty, expectedPrice);
+        MakeUp createdMakeUp = new MakeUp(nextSku++, name, brand,
+                type, color, qty, price);
 
         inventory.add(createdMakeUp);
         return createdMakeUp;
@@ -35,6 +35,7 @@ public class MakeUpServices {
     public ArrayList<MakeUp> findAll() {
         return inventory;
     }
+
     public boolean delete(int sku) {
         for (int index = 0; index < inventory.size(); index++) {
             if (inventory.get(index).getSku() == sku) {
@@ -44,5 +45,6 @@ public class MakeUpServices {
         }
         return false;
     }
-
 }
+
+

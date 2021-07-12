@@ -37,6 +37,21 @@ public class Console {
 
     }
 
+    public static void makeUpType(){
+        System.out.println(""+
+                "******************************************************\n" +
+                "***              Product Type Choices              ***\n" +
+                "***                                                ***\n" +
+                "***    1. Foundation                               ***\n" +
+                "***    2. Mascara                                  ***\n" +
+                "***    3. Eyeliner                                 ***\n" +
+                "***    4. Highlight                                ***\n" +
+                "***    5. Lip gloss                                ***\n" +
+                "***    6. Exit                                     ***\n" +
+                "******************************************************\n");
+
+    }
+
     public static void hairType() {
         System.out.println(""+
                 "******************************************************\n" +
@@ -50,10 +65,11 @@ public class Console {
                 "******************************************************\n");
     }
 
+
     public static void changeQtyOrPrice(){
         System.out.println(""+
                 "******************************************************\n" +
-                "***   Do you want to change the price or quantity  ***\n" +
+                "***            What do you want to change?         ***\n" +
                 "***                                                ***\n" +
                 "***    1. Quantity                                 ***\n" +
                 "***    2. Price                                    ***\n" +
@@ -63,12 +79,22 @@ public class Console {
     public static void pickHairOrMake(){
         System.out.println(""+
                 "******************************************************\n" +
-                "***      Do you want to search Hair or MakeUp?     ***\n" +
+                "***            Do you want Hair or MakeUp?         ***\n" +
                 "***                                                ***\n" +
                 "***    1. Hair Products                            ***\n" +
                 "***    2. MakeUp Products                          ***\n" +
                 "***    3. Exit                                     ***\n" +
                 "******************************************************\n");
+    }
+    public static void correctYesOrNo(){
+        System.out.println(""+
+                "******************************************************\n" +
+                "*** Confirm this is the product you want to update ***\n" +
+                "***                                                ***\n" +
+                "***             Type \"y\" for Yes                 ***\n" +
+                "***             Type \"n\" for No                  ***\n" +
+                "******************************************************\n");
+
     }
 
 }

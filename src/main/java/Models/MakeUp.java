@@ -5,7 +5,7 @@ public class MakeUp {
     private String name;
     private String brand;
     private String type;
-    private String sectionOfFace;
+    private String color;
     private int qty;
     private double price;
 
@@ -13,12 +13,12 @@ public class MakeUp {
     }
 
     public MakeUp(int sku, String name, String brand, String type,
-                  String sectionOfFace, int qty, double price) {
+                  String color, int qty, double price) {
     setSku(sku);
     setName(name);
     setBrand(brand);
     setType(type);
-    setSectionOfFace(sectionOfFace);
+    setColor(color);
     setQty(qty);
     setPrice(price);
     }
@@ -56,12 +56,12 @@ public class MakeUp {
         return type;
     }
 
-    public void setSectionOfFace(String sectionOfFace) {
-        this.sectionOfFace = sectionOfFace;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getSectionOfFace() {
-        return sectionOfFace;
+    public String getColor() {
+        return color;
     }
 
     public void setQty(Integer qty) {
@@ -78,5 +78,13 @@ public class MakeUp {
 
     public Double getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString(){
+        return "SKU: " + this.getSku() + " Name: " + this.getName() +
+                " Brand: " + this.getBrand() + " Type: " + this.getType() +
+                " Color: " + this.getColor() + " Quantity: " + this.getQty() +
+                " Price: " + this.getPrice();
     }
 }

@@ -66,7 +66,7 @@ public class HairProducts extends HairProductsServices {
         return typeOfHair;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(int qty){
         this.qty = qty;
     }
 
@@ -84,9 +84,9 @@ public class HairProducts extends HairProductsServices {
 
     @Override
     public String toString(){
-        return "SKU: " + this.getSku() + " Name: " + this.getName() +
-                " Brand: " + this.getBrand() + " Use: " + this.getUse() +
-                " Hair Type: " + this.getTypeOfHair() + " Quantity: " + this.getQty() +
-                " Price: " + this.getPrice();
+        return "***     SKU: " + this.getSku() + "| Name: " + this.getName() +
+                "| Brand: " + this.getBrand() + "| Use: " + this.getUse() +
+                "| Hair Type: " + this.getTypeOfHair() + "| Quantity: " + this.getQty() +
+                "| Price: " + this.getPrice() + "|     ***";
 }
 }

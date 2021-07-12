@@ -28,7 +28,7 @@ public class MakeUpServicesTest {
         String actualName = testMakeUp.getName();
         String actualBrand = testMakeUp.getBrand();
         String actualType = testMakeUp.getType();
-        String actualSectionOfFace = testMakeUp.getSectionOfFace();
+        String actualSectionOfFace = testMakeUp.getColor();
         int actualQty = testMakeUp.getQty();
         double actualPrice = testMakeUp.getPrice();
 

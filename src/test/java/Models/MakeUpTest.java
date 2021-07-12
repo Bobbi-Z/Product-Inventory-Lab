@@ -24,7 +24,7 @@ public class MakeUpTest {
         Assertions.assertEquals(expectedName, testMakeUp.getName());
         Assertions.assertEquals(expectedBrand, testMakeUp.getBrand());
         Assertions.assertEquals(expectedType, testMakeUp.getType());
-        Assertions.assertEquals(expectedSectionOfFace, testMakeUp.getSectionOfFace());
+        Assertions.assertEquals(expectedSectionOfFace, testMakeUp.getColor());
         Assertions.assertEquals(expectedQty, testMakeUp.getQty());
         Assertions.assertEquals(expectedPrice, testMakeUp.getPrice());
 
@@ -70,8 +70,8 @@ public class MakeUpTest {
     public void testSetSectionOfFace(){
         MakeUp makeUp = new MakeUp();
         String expected = "Whole face";
-        makeUp.setSectionOfFace(expected);
-        String actual= makeUp.getSectionOfFace();
+        makeUp.setColor(expected);
+        String actual= makeUp.getColor();
         Assertions.assertEquals(expected, actual);
     }
 
