@@ -89,7 +89,7 @@ public class Console {
     public static void correctYesOrNo(){
         System.out.println(""+
                 "******************************************************\n" +
-                "*** Confirm this is the product you want to update ***\n" +
+                "*** Confirm this is the product you want to change ***\n" +
                 "***                                                ***\n" +
                 "***             Type \"y\" for Yes                 ***\n" +
                 "***             Type \"n\" for No                  ***\n" +

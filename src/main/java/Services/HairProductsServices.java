@@ -41,7 +41,7 @@ public class HairProductsServices {
         }
         return false;
     }
-
+/*
     public HairProducts updateQty(int sku, int newQty) {
         HairProducts updatedProd = null;
 
@@ -66,6 +66,6 @@ public class HairProductsServices {
             }
         }
        return updatedProd;
-    }
+    } */
 
 }

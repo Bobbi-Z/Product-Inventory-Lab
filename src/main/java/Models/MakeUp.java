@@ -1,6 +1,8 @@
 package Models;
 
-public class MakeUp {
+import Services.MakeUpServices;
+
+public class MakeUp extends MakeUpServices {
     private int sku;
     private String name;
     private String brand;
@@ -87,4 +89,5 @@ public class MakeUp {
                 " Color: " + this.getColor() + " Quantity: " + this.getQty() +
                 " Price: " + this.getPrice();
     }
+
 }

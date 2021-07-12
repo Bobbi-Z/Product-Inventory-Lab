@@ -80,7 +80,10 @@ public class App {
                 choiceFour();
                 break;
             case 5:
-               // choiceFive();
+               choiceFive();
+                break;
+            case 6:
+                choiceSix();
                 break;
 
         }
@@ -242,7 +245,7 @@ public class App {
                     break;
                 case 3:
                     resultOfTypeChoice = Integer.toString(3);
-                    resultOfTypeChoice = "Curley | 3a-3c";
+                    resultOfTypeChoice = "Curly | 3a-3c";
                     break;
                 case 4:
                     resultOfTypeChoice = Integer.toString(4);
@@ -341,7 +344,7 @@ public class App {
             mainMenu();
         }
     }
-    public void choiceFour(){
+    public void choiceFour() {
         ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
         ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
         pickHairOrMake();
@@ -372,62 +375,164 @@ public class App {
                 System.out.println("Is this the correct product you want to up date?");
                 input.nextLine();
                 clientInput = input.next();
-                if (clientInput == "n"){
+                if (clientInput == "n") {
                     choiceFour();
                 }
                 changeQtyOrPrice();
                 System.out.println("Please make your selection");
                 input.nextLine();
                 numChoice = input.nextInt();
-                switch (numChoice){
+                switch (numChoice) {
                     case 1:
                         System.out.println("Please enter in the new quantity: ");
                         input.nextLine();
                         int newQty = input.nextInt();
-                        HairProducts updatedQty = found.updateQty(sku, newQty);
-                        System.out.println("The updated product is: \n" + updatedQty);
+                        found.setQty(newQty);
+                        System.out.println("The updated product is: \n" + found.toString());
                         returnToCurrentMenu();
                         mainMenu();
                     case 2:
                         System.out.println("Please enter in the new price formatted as 0.00: ");
                         input.nextLine();
                         double newPrice = input.nextDouble();
-                        HairProducts updatedPrice = found.updatePrice(sku, newPrice);
-                        System.out.println("The updated product is \n" + updatedPrice.toString());
+                        found.setPrice(newPrice);
+                        System.out.println("The updated product is \n" + found.toString());
                         returnToCurrentMenu();
                         mainMenu();
                 }
             }
-
-
-
-
-    }
-    //public void choiceFive(){
-
-    }
-
-
-
-       /*     case 4:
-                Console.changeQtyOrPrice();
+        } else if (numChoice == 2) {
+            if (makeUpServices.inventory.isEmpty()) {
+                System.out.println("There is no current inventory");
+                returnToCurrentMenu();
+                choiceFour();
+            } else {
+                for (MakeUp element : allMakeup) {
+                    System.out.println(element.toString());
+                }
+            }
+            System.out.println("Please choose the item you want to update by SKU: ");
+            input.nextLine();
+            int sku = input.nextInt();
+            MakeUp found = makeUpServices.findMakeUp(sku);
+            if (found == null) {
+                System.out.println("This is not a valid sku");
+                returnToCurrentMenu();
+                choiceFour();
+            } else {
+                correctYesOrNo();
+                System.out.println(found.toString());
+                System.out.println("Is this the correct product you want to up date?");
                 input.nextLine();
-                System.out.println("Please enter sku: ");
-                sku = input.nextInt();
-
-
-
-
-            case 6:
-                System.out.println("Returning to Welcome Screen");
-                System.exit(6);
-
-            default:
-                System.out.println("Your input is invalid");
-                break;
+                clientInput = input.next();
+                if (clientInput == "n") {
+                    choiceFour();
+                }
+                changeQtyOrPrice();
+                System.out.println("Please make your selection");
+                input.nextLine();
+                numChoice = input.nextInt();
+                switch (numChoice) {
+                    case 1:
+                        System.out.println("Please enter in the new quantity: ");
+                        input.nextLine();
+                        int newQty = input.nextInt();
+                        found.setQty(newQty);
+                        System.out.println("The updated product is: \n" + found.toString());
+                        returnToCurrentMenu();
+                        mainMenu();
+                    case 2:
+                        System.out.println("Please enter in the new price formatted as 0.00: ");
+                        input.nextLine();
+                        double newPrice = input.nextDouble();
+                        found.setPrice(newPrice);
+                        System.out.println("The updated product is \n" + found.toString());
+                        returnToCurrentMenu();
+                        mainMenu();
+                }
+            }
         }
-
-
-    }*/
-
     }
+    public void choiceFive(){
+        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
+        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
+        pickHairOrMake();
+        System.out.println("Please choose the type of product you want to update: ");
+        input.nextLine();
+        numChoice = input.nextInt();
+        if (numChoice == 1) {
+            if (hairProductsServices.inventory.isEmpty()) {
+                System.out.println("There is no current inventory");
+                returnToCurrentMenu();
+                choiceFive();
+            } else {
+                for (HairProducts element : allHairProducts) {
+                    System.out.println(element.toString());
+                }
+            }
+            System.out.println("Please choose the item you want to delete by SKU: ");
+            input.nextLine();
+            int sku = input.nextInt();
+            HairProducts found = hairProductsServices.findHairProduct(sku);
+            if (found == null) {
+                System.out.println("This is not a valid sku");
+                returnToCurrentMenu();
+                choiceFive();
+            } else {
+                correctYesOrNo();
+                System.out.println(found.toString());
+                System.out.println("Is this the correct product you want to delete?");
+                input.nextLine();
+                clientInput = input.next();
+                if (clientInput == "n") {
+                    choiceFive();
+                } else if (clientInput == "y") {
+                    found.delete(sku);
+                    System.out.println(found.toString() + "\n has been deleted");
+                    found.delete(sku);
+                    returnToCurrentMenu();
+                    mainMenu();
+                }
+            }
+        } else if (numChoice == 2) {
+            if (makeUpServices.inventory.isEmpty()) {
+                System.out.println("There is no current inventory");
+                returnToCurrentMenu();
+                choiceFive();
+            } else {
+                for (MakeUp element : allMakeup) {
+                    System.out.println(element.toString());
+                }
+            }
+            System.out.println("Please choose the item you want to delete by SKU: ");
+            input.nextLine();
+            int sku = input.nextInt();
+            MakeUp found = makeUpServices.findMakeUp(sku);
+            if (found == null) {
+                System.out.println("This is not a valid sku");
+                returnToCurrentMenu();
+                choiceFive();
+            } else {
+                correctYesOrNo();
+                System.out.println(found.toString());
+                System.out.println("Is this the correct product you want to delete?");
+                input.nextLine();
+                clientInput = input.next();
+                if (clientInput == "n") {
+                    choiceFive();
+                } else if (clientInput == "y") {
+                    System.out.println(found.toString() + "\n has been deleted");
+                    found.delete(sku);
+                    returnToCurrentMenu();
+                    mainMenu();
+                }
+            }
+        }
+    }
+    public void choiceSix(){
+        System.out.println("Returning to Welcome Screen");
+        Console.printWelcome();
+        System.out.println("GoodBye!");
+        System.exit(6);
+        }
+}

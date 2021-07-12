@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class MakeUpServices {
 
-    private static int nextSku = 1500;
+    private static int nextSku = 2000;
 
     public ArrayList<MakeUp> inventory = new ArrayList<>();
 
