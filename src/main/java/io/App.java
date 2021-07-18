@@ -7,6 +7,8 @@ import Services.MakeUpServices;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import static io.Console.*;
@@ -38,7 +40,7 @@ public class App {
         hairProductsServices.create("Ghost Weightless Hair Oil", "Verb", "Style",
                 "Straight | 1a-1c", 10, 18.00);
         makeUpServices.create("Complexion Rescue Tinted Hydrating Gel Cream Broad Spectrum SPF 30",
-                "bareMinerals", "Foundation", "Opal 01", 10, 33.00);
+                "bareMinerals", "foundation", "Opal 01", 10, 33.00);
         makeUpServices.create("Better Than Sex Volumizing Mascara", "Too Faced", "Mascara",
                 "Black", 10, 26.00);
         makeUpServices.create("24/7 Glide-On Waterproof Eyeliner Pencil", "Urban Decay",
@@ -51,487 +53,518 @@ public class App {
 
     public void init() {
         Console.printWelcome();
-        System.out.println("Press any number to go to the main menu");
-        numChoice = input.nextInt();
-        mainMenu();
+        welcome();
     }
-    public void returnToCurrentMenu(){
-        System.out.println("Enter any value to return");
-        input.nextLine();
+
+    public void welcome(){
+        System.out.println("Enter 'm' to go to the main menu");
+        switch (stringInput()){
+            case "m":
+            mainMenuChoices();
+            break;
+            default:
+            notAValidChoice();
+            welcome();
+        }
+    }
+
+    public int numberInput(){
+       // input.nextLine();
+           numChoice = input.nextInt();
+           return numChoice;
+    }
+
+    public String stringInput(){
+      //  input.nextLine();
         clientInput = input.next();
+        return clientInput;
+
     }
-     public void mainMenu(){
+    public String returnToCurrentMenu() {
+        System.out.println("Enter 'r' to return");
+        switch (stringInput()) {
+            case "r":
+            return "r";
+            default:
+            notAValidChoice();
+            returnToCurrentMenu();
+        }
+        return stringInput();
+    }
+     public void mainMenuChoices(){
         Console.mainMenu();
         System.out.println("Please enter your choice: ");
-        input.nextLine();
-        numChoice = input.nextInt();
-
-        switch (numChoice) {
+        switch (numberInput()) {
             case 1:
-                choiceOne();
+                allProductsList();
                 break;
             case 2:
-                choiceTwo();
+                searchBySku();
                 break;
             case 3:
-                choiceThree();
+                addNewProduct();
                 break;
             case 4:
-                choiceFour();
+                updateExisting();
                 break;
             case 5:
-               choiceFive();
+               deleteProduct();
                 break;
             case 6:
-                choiceSix();
+                exit();
+                break;
+            default:
+                notAValidChoice();
+                mainMenuChoices();
+
+        }
+
+    }
+
+    public String notAValidChoice(){
+        System.out.println("That is not a valid choice");
+        return  returnToCurrentMenu();
+    }
+
+    public int pickHairOrMakeup() {
+        pickHairOrMake();
+        switch (numberInput()) {
+            case 1: //hair products chosen
+                return 1;
+            case 2:
+                return 2;
+            case 3:
+                mainMenuChoices();
+                break;
+            default:
+                notAValidChoice();
+                pickHairOrMake();
+        }
+        return numberInput();
+    }
+
+    public void findAllHair(){
+        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
+        if (hairProductsServices.inventory.isEmpty()) {
+            notAValidChoice();
+            mainMenuChoices();
+        }
+        for (HairProducts element : allHairProducts) {
+            System.out.println(element.toString());
+        }
+    }
+
+    public void findAllMU(){
+        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
+        if (makeUpServices.inventory.isEmpty()) {
+            notAValidChoice();
+            mainMenuChoices();
+        }
+        for (MakeUp element : allMakeup) {
+            System.out.println(element.toString());
+
+        }
+
+    }
+
+    public void allProductsList() {
+        switch (pickHairOrMakeup()){
+            case 1:
+                findAllHair();
+                break;
+            case 2:
+                findAllMU();
+                break;
+            case 3:
+                mainMenuChoices();
+                break;
+            default:
+                notAValidChoice();
+                allProductsList();
+        }
+        returnToCurrentMenu();
+        mainMenuChoices();
+            }
+
+   public HairProducts findHairBySku(){
+       int sku = 0;
+       System.out.println("Please enter sku: ");
+       sku = numberInput();
+       HairProducts foundHairProduct = hairProductsServices.findHairProduct(sku);
+       if (foundHairProduct == null) {
+           notAValidChoice();
+           mainMenuChoices();
+       }
+       return foundHairProduct;
+    }
+
+   public MakeUp findMakeupBySku(){
+        int sku = 0;
+       System.out.println("Please enter sku: ");
+       sku = numberInput();
+       MakeUp foundMakeUpProduct = makeUpServices.findMakeUp(sku);
+       if (foundMakeUpProduct == null) {
+           notAValidChoice();
+           mainMenuChoices();
+       }
+        return foundMakeUpProduct;
+   }
+
+    public void searchBySku() {
+        switch (pickHairOrMakeup()) {
+            case 1:
+                System.out.println(findHairBySku());
+                break;
+            case 2:
+                System.out.println(findMakeupBySku());
+                break;
+            case 3:
+                mainMenuChoices();
+                break;
+            default:
+                notAValidChoice();
+                searchBySku();
+        }
+        returnToCurrentMenu();
+        searchBySku();
+    }
+
+    public String hairProductUse(){
+        Console.productUse();
+        String resultOfUseChoice = "";
+        switch (numberInput()){
+            case 1:
+                resultOfUseChoice = "Shampoo";
+                break;
+            case 2:
+                resultOfUseChoice = "Conditioner";
+                break;
+            case 3:
+                resultOfUseChoice = "Mask";
+                break;
+            case 4:
+                resultOfUseChoice = "Style";
+                break;
+            case 5:
+                addNewProduct();
+                break;
+            default:
+                notAValidChoice();
+                addNewProduct();
                 break;
 
         }
+     return  resultOfUseChoice;
     }
 
-    public void choiceOne() {
-        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
-        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
-        pickHairOrMake();
-        System.out.println("Please choose ");
-        numChoice = input.nextInt();
-        if (numChoice == 1) {
-            if (hairProductsServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceOne();
-            } else {
-                for (HairProducts element : allHairProducts) {
-                    System.out.println(element.toString());
-                }
-                returnToCurrentMenu();
-                choiceOne();
-            }
+    public String hairTypeSelection(){
+        Console.hairType();
+        String resultOfTypeChoice = "";
 
-        } else if (numChoice == 2) {
-
-            if (makeUpServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceOne();
-            } else {
-                for (MakeUp element : allMakeup) {
-                    System.out.println(element.toString());
-                }
-                returnToCurrentMenu();
-                choiceOne();
-            }
-
-            }else{
-            mainMenu();
+        switch (numberInput()) {
+            case 1:
+                resultOfTypeChoice = "Straight | 1a-1c";
+                break;
+            case 2:
+                resultOfTypeChoice = "Wavy | 2a-2c";
+                break;
+            case 3:
+                resultOfTypeChoice = "Curly | 3a-3c";
+                break;
+            case 4:
+                resultOfTypeChoice = "Coily | 4a-4c";
+                break;
+            case 5:
+                addNewProduct();
+                break;
+            default:
+                notAValidChoice();
+                addNewProduct();
+                break;
         }
+        return resultOfTypeChoice;
     }
 
-    public void choiceTwo(){
-        pickHairOrMake();
-        System.out.println("Please choose ");
-        numChoice = input.nextInt();
-        int sku = 0;
 
-        if(numChoice == 1) { //choosing hair
-            System.out.println("Please enter sku: ");
-            input.nextLine();
-            sku = input.nextInt();
-            HairProducts found = hairProductsServices.findHairProduct(sku);
-            if (found == null) {
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceTwo();
-            } else {
-                System.out.println(found.toString());
-                returnToCurrentMenu();
-                choiceTwo();
-            }
-        } else if (numChoice == 2){
-            System.out.println("Please enter sku: ");
-            input.nextLine();
-            sku = input.nextInt();
-            MakeUp found = makeUpServices.findMakeUp(sku);
-            if (found == null){
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceTwo();
-            }else {
-                System.out.println(found.toString());
-                returnToCurrentMenu();
-                choiceTwo();
-            }
+    public void addHair(){
+        String name = "";
+        String brand = "";
+        String use = "";
+        String typeOfHair = "";
+        Integer qty = 0;
+        double price = 0;
 
-        } else {
-            mainMenu();
-        }
+        System.out.println("Please fill in the required information.");
+        System.out.println("Product name: ");
+        name = stringInput();
+
+        System.out.println("Brand of product: ");
+        brand = stringInput();
+
+        use = hairProductUse();
+
+        typeOfHair = hairTypeSelection();
+
+
+        System.out.println("Please enter the quantity: ");
+        qty = numberInput();
+
+        System.out.println("Please enter the price in format example 0.00: ");
+        input.nextLine();
+        price = input.nextDouble();
+
+
+        HairProducts newlyCreated = hairProductsServices.create(name, brand, use, typeOfHair,
+                qty, price);
+        System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
     }
-    public void choiceThree() {
-        pickHairOrMake();
-        System.out.println("Choose the category of product");
-        numChoice = input.nextInt();
 
-        if (numChoice == 1) {
-            String name = "";
-            String brand = "";
-            int useChoice = 0;
-            String use = "";
-            int hairTypeChoice = 0;
-            String typeOfHair = "";
-            Integer qty = 0;
-            double price = 0;
+    public String makeupTypeSelection(){
+        Console.makeUpType();
+        System.out.println("Please select the product type from the following options: ");
+        String resultOfMakeupTypeChoice = "";
 
-            System.out.println("Please fill in the required information.");
-            System.out.println("Product name: ");
-            input.nextLine();
-            name = input.next();
-
-            System.out.println("Brand of product: ");
-            input.nextLine();
-            name = input.next();
-
-            Console.productUse();
-            System.out.println("Please select product use from the following options: ");
-            input.nextLine();
-            useChoice = input.nextInt();
-            String resultOfUseChoice = "";
-            if (useChoice == 5) {
-                choiceThree();
-            } else if (useChoice >= 6) {
-                System.out.println("That was not a valid selection");
-                returnToCurrentMenu();
-                choiceThree();
-                switch (useChoice) {
-                    case 1:
-                        resultOfUseChoice = Integer.toString(1);
-                        resultOfUseChoice = "Shampoo";
-                        break;
-                    case 2:
-                        resultOfUseChoice = Integer.toString(2);
-                        resultOfUseChoice = "Conditioner";
-                        break;
-                    case 3:
-                        resultOfUseChoice = Integer.toString(3);
-                        resultOfUseChoice = "Mask";
-                        break;
-                    case 4:
-                        resultOfUseChoice = Integer.toString(4);
-                        resultOfUseChoice = "Style";
-                        break;
-                }
-                use = resultOfUseChoice;
-            }
-
-            Console.hairType();
-            System.out.println("Please select hair type this product is for from the following options: ");
-            input.nextLine();
-            hairTypeChoice = input.nextInt();
-            String resultOfTypeChoice = "";
-            if (hairTypeChoice == 5) {
-                choiceThree();
-            } else if (hairTypeChoice >= 6) {
-                System.out.println("That was not a valid selection");
-                returnToCurrentMenu();
-                choiceThree();
-            }
-            switch (hairTypeChoice) {
+            switch (numberInput()) {
                 case 1:
-                    resultOfTypeChoice = Integer.toString(1);
-                    resultOfTypeChoice = "Straight | 1a-1c";
+                    resultOfMakeupTypeChoice = "Foundation";
                     break;
                 case 2:
-                    resultOfTypeChoice = Integer.toString(2);
-                    resultOfTypeChoice = "Wavy | 2a-2c";
+                    resultOfMakeupTypeChoice = "Mascara";
                     break;
                 case 3:
-                    resultOfTypeChoice = Integer.toString(3);
-                    resultOfTypeChoice = "Curly | 3a-3c";
+                    resultOfMakeupTypeChoice = "Eyeliner";
                     break;
                 case 4:
-                    resultOfTypeChoice = Integer.toString(4);
-                    resultOfTypeChoice = "Coily | 4a-4c";
+                    resultOfMakeupTypeChoice = "Highlighter";
+                    break;
+                case 5:
+                    resultOfMakeupTypeChoice = "Lip Gloss";
+                case 6:
+                    addNewProduct();
+                    break;
+                default:
+                    notAValidChoice();
+                    addNewProduct();
                     break;
             }
-            typeOfHair = resultOfTypeChoice;
-
-            System.out.println("Please enter the quantity: ");
-            input.nextLine();
-            qty = input.nextInt();
-
-            System.out.println("Please enter the price in format example 0.00: ");
-            input.nextLine();
-            price = input.nextDouble();
-
-
-           HairProducts newlyCreated = hairProductsServices.create(name, brand, use, typeOfHair,
-                   qty, price);
-            System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
-            returnToCurrentMenu();
-            mainMenu();
-
-        } else if (numChoice == 2) {
-
-            String name = "";
-            String brand = "";
-            int makeupTypeChoice = 0;
-            String type = "";
-            String color = "";
-            Integer qty = 0;
-            double price = 0;
-
-            System.out.println("Please fill in the required information.");
-            System.out.println("Product name: ");
-            input.nextLine();
-            name = input.next();
-
-            System.out.println("Brand of product: ");
-            input.nextLine();
-            brand = input.next();
-
-            Console.makeUpType();
-            System.out.println("Please select the product type from the following options: ");
-            input.nextLine();
-            makeupTypeChoice = input.nextInt();
-            String resultOfMakeupTypeChoice = "";
-            if (makeupTypeChoice == 6) {
-                choiceThree();
-            } else if (makeupTypeChoice >= 7) {
-                System.out.println("That was not a valid selection");
-                returnToCurrentMenu();
-                choiceThree();
-                switch (makeupTypeChoice) {
-                    case 1:
-                        resultOfMakeupTypeChoice = Integer.toString(1);
-                        resultOfMakeupTypeChoice = "Foundation";
-                        break;
-                    case 2:
-                        resultOfMakeupTypeChoice = Integer.toString(2);
-                        resultOfMakeupTypeChoice = "Mascara";
-                        break;
-                    case 3:
-                        resultOfMakeupTypeChoice = Integer.toString(3);
-                        resultOfMakeupTypeChoice = "Eyeliner";
-                        break;
-                    case 4:
-                        resultOfMakeupTypeChoice = Integer.toString(4);
-                        resultOfMakeupTypeChoice = "Highlighter";
-                        break;
-                    case 5:
-                        resultOfMakeupTypeChoice = Integer.toString(5);
-                        resultOfMakeupTypeChoice = "Lip Gloss";
-                }
-                type = resultOfMakeupTypeChoice;
-            }
-
-            System.out.println("Color of product: ");
-            input.nextLine();
-            color = input.next();
-
-            System.out.println("Please enter the quantity: ");
-            input.nextLine();
-            qty = input.nextInt();
-
-            System.out.println("Please enter the price in format example 0.00: ");
-            input.nextLine();
-            price = input.nextDouble();
-
-            MakeUp newlyCreated = makeUpServices.create(name, brand, type, color, qty, price);
-            System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
-            returnToCurrentMenu();
-            mainMenu();
-
-        } else {
-            mainMenu();
+        return resultOfMakeupTypeChoice;
         }
-    }
-    public void choiceFour() {
-        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
-        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
-        pickHairOrMake();
-        System.out.println("Please choose the type of product you want to update: ");
+
+
+
+    public void addMakeup(){
+        String name = "";
+        String brand = "";
+        String type = "";
+        String color = "";
+        Integer qty = 0;
+        double price = 0;
+
+        System.out.println("Please fill in the required information.");
+        System.out.println("Product name: ");
+        name = stringInput();
+
+        System.out.println("Brand of product: ");
+        brand = stringInput();
+
+        type = makeupTypeSelection();
+
+        System.out.println("Color of product: ");
+        color = stringInput();
+
+        System.out.println("Please enter the quantity: ");
+        qty = numberInput();
+
+        System.out.println("Please enter the price in format example 0.00: ");
         input.nextLine();
-        numChoice = input.nextInt();
-        if (numChoice == 1) {
-            if (hairProductsServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceFour();
-            } else {
-                for (HairProducts element : allHairProducts) {
-                    System.out.println(element.toString());
-                }
-            }
-            System.out.println("Please choose the item you want to update by SKU: ");
-            input.nextLine();
-            int sku = input.nextInt();
-            HairProducts found = hairProductsServices.findHairProduct(sku);
-            if (found == null) {
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceFour();
-            } else {
-                correctYesOrNo();
-                System.out.println(found.toString());
-                System.out.println("Is this the correct product you want to up date?");
-                input.nextLine();
-                clientInput = input.next();
-                if (clientInput == "n") {
-                    choiceFour();
-                }
-                changeQtyOrPrice();
-                System.out.println("Please make your selection");
-                input.nextLine();
-                numChoice = input.nextInt();
-                switch (numChoice) {
-                    case 1:
-                        System.out.println("Please enter in the new quantity: ");
-                        input.nextLine();
-                        int newQty = input.nextInt();
-                        found.setQty(newQty);
-                        System.out.println("The updated product is: \n" + found.toString());
-                        returnToCurrentMenu();
-                        mainMenu();
-                    case 2:
-                        System.out.println("Please enter in the new price formatted as 0.00: ");
-                        input.nextLine();
-                        double newPrice = input.nextDouble();
-                        found.setPrice(newPrice);
-                        System.out.println("The updated product is \n" + found.toString());
-                        returnToCurrentMenu();
-                        mainMenu();
-                }
-            }
-        } else if (numChoice == 2) {
-            if (makeUpServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceFour();
-            } else {
-                for (MakeUp element : allMakeup) {
-                    System.out.println(element.toString());
-                }
-            }
-            System.out.println("Please choose the item you want to update by SKU: ");
-            input.nextLine();
-            int sku = input.nextInt();
-            MakeUp found = makeUpServices.findMakeUp(sku);
-            if (found == null) {
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceFour();
-            } else {
-                correctYesOrNo();
-                System.out.println(found.toString());
-                System.out.println("Is this the correct product you want to up date?");
-                input.nextLine();
-                clientInput = input.next();
-                if (clientInput == "n") {
-                    choiceFour();
-                }
-                changeQtyOrPrice();
-                System.out.println("Please make your selection");
-                input.nextLine();
-                numChoice = input.nextInt();
-                switch (numChoice) {
-                    case 1:
-                        System.out.println("Please enter in the new quantity: ");
-                        input.nextLine();
-                        int newQty = input.nextInt();
-                        found.setQty(newQty);
-                        System.out.println("The updated product is: \n" + found.toString());
-                        returnToCurrentMenu();
-                        mainMenu();
-                    case 2:
-                        System.out.println("Please enter in the new price formatted as 0.00: ");
-                        input.nextLine();
-                        double newPrice = input.nextDouble();
-                        found.setPrice(newPrice);
-                        System.out.println("The updated product is \n" + found.toString());
-                        returnToCurrentMenu();
-                        mainMenu();
-                }
-            }
-        }
+        price = input.nextDouble();
+
+        MakeUp newlyCreated = makeUpServices.create(name, brand, type, color, qty, price);
+        System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
     }
-    public void choiceFive(){
-        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
-        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
-        pickHairOrMake();
-        System.out.println("Please choose the type of product you want to update: ");
-        input.nextLine();
-        numChoice = input.nextInt();
-        if (numChoice == 1) {
-            if (hairProductsServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceFive();
-            } else {
-                for (HairProducts element : allHairProducts) {
-                    System.out.println(element.toString());
-                }
-            }
-            System.out.println("Please choose the item you want to delete by SKU: ");
-            input.nextLine();
-            int sku = input.nextInt();
-            HairProducts found = hairProductsServices.findHairProduct(sku);
-            if (found == null) {
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceFive();
-            } else {
-                correctYesOrNo();
-                System.out.println(found.toString());
-                System.out.println("Is this the correct product you want to delete?");
-                input.nextLine();
-                clientInput = input.next();
-                if (clientInput == "n") {
-                    choiceFive();
-                } else if (clientInput == "y") {
-                    found.delete(sku);
-                    System.out.println(found.toString() + "\n has been deleted");
-                    found.delete(sku);
-                    returnToCurrentMenu();
-                    mainMenu();
-                }
-            }
-        } else if (numChoice == 2) {
-            if (makeUpServices.inventory.isEmpty()) {
-                System.out.println("There is no current inventory");
-                returnToCurrentMenu();
-                choiceFive();
-            } else {
-                for (MakeUp element : allMakeup) {
-                    System.out.println(element.toString());
-                }
-            }
-            System.out.println("Please choose the item you want to delete by SKU: ");
-            input.nextLine();
-            int sku = input.nextInt();
-            MakeUp found = makeUpServices.findMakeUp(sku);
-            if (found == null) {
-                System.out.println("This is not a valid sku");
-                returnToCurrentMenu();
-                choiceFive();
-            } else {
-                correctYesOrNo();
-                System.out.println(found.toString());
-                System.out.println("Is this the correct product you want to delete?");
-                input.nextLine();
-                clientInput = input.next();
-                if (clientInput == "n") {
-                    choiceFive();
-                } else if (clientInput == "y") {
-                    System.out.println(found.toString() + "\n has been deleted");
-                    found.delete(sku);
-                    returnToCurrentMenu();
-                    mainMenu();
-                }
-            }
+
+
+    public void addNewProduct() {
+        switch (pickHairOrMakeup()){
+            case 1:
+            addHair();
+            break;
+            case 2:
+            addMakeup();
+            break;
+            case 3:
+            addNewProduct();
+            break;
+            default:
+                notAValidChoice();
+                addNewProduct();
         }
+        returnToCurrentMenu();
+        addNewProduct();
     }
-    public void choiceSix(){
-        System.out.println("Returning to Welcome Screen");
-        Console.printWelcome();
+
+   public String isThisCorrect(){
+        correctYesOrNo();
+       System.out.println("Is this the correct product you want to update?");
+       switch (stringInput()){
+           case "n":
+               mainMenuChoices();
+               break;
+           case "y":
+               break;
+           default:
+               notAValidChoice();
+               isThisCorrect();
+       }
+       return "y";
+   }
+
+    public int changePriceOrQty() {
+        changeQtyOrPrice();
+        System.out.println("Please make your selection");
+        return numberInput();
+    }
+
+    public HairProducts updateHairPQty() {
+        findAllHair();
+        System.out.println("Please choose the item you want to update by SKU: ");
+        HairProducts foundHairP = findHairBySku();
+        System.out.println(foundHairP);
+        isThisCorrect();
+        System.out.println("Please enter in the new quantity: ");
+        foundHairP.setQty(numberInput());
+        System.out.println("The updated product is: \n" + foundHairP);
+        return foundHairP;
+    }
+
+    public HairProducts updateHairPPrice() {
+        findAllHair();
+        System.out.println("Please choose the item you want to update by SKU: ");
+        HairProducts foundHairP = findHairBySku();
+        System.out.println(foundHairP);
+        isThisCorrect();
+        System.out.println("Please enter in the new price formatted as 0.00: ");
+        foundHairP.setPrice(input.nextDouble());
+        System.out.println("The updated product is \n" + foundHairP);
+        return foundHairP;
+
+    }
+    public void updateHairP() {
+        switch (changePriceOrQty()) {
+            case 1:
+                updateHairPQty();
+                break;
+            case 2:
+                updateHairPPrice();
+                break;
+            default:
+                notAValidChoice();
+               updateHairP();
+        }
+        updateExisting();
+    }
+
+        public MakeUp updateMUQty() {
+            findAllMU();
+            System.out.println("Please choose the item you want to update by SKU: ");
+           MakeUp foundMU = findMakeupBySku();
+            System.out.println(foundMU);
+            isThisCorrect();
+            System.out.println("Please enter in the new quantity: ");
+            foundMU.setQty(numberInput());
+            System.out.println("The updated product is: \n" + foundMU);
+            return foundMU;
+        }
+
+        public MakeUp updateMUPrice(){
+            findAllMU();
+            System.out.println("Please choose the item you want to update by SKU: ");
+            MakeUp foundMU = findMakeupBySku();
+            System.out.println(foundMU);
+            isThisCorrect();
+            System.out.println("Please enter in the new price formatted as 0.00: ");
+            foundMU.setPrice(input.nextDouble());
+            System.out.println("The updated product is \n" + foundMU);
+            return foundMU;
+        }
+
+        public void updateMU() {
+            switch (changePriceOrQty()) {
+                case 1:
+                    updateMUQty();
+                    break;
+                case 2:
+                    updateMUPrice();
+                    break;
+                default:
+                    notAValidChoice();
+                    updateMU();
+            }
+        updateExisting();
+        }
+
+
+    public void updateExisting(){
+        switch (pickHairOrMakeup()){
+            case 1:
+                updateHairP();
+                break;
+            case 2:
+                updateMU();
+                break;
+            default:
+                notAValidChoice();
+               updateExisting();
+            }
+            returnToCurrentMenu();
+        mainMenuChoices();
+    }
+
+    public void deleteHair() {
+        findAllHair();
+        System.out.println("Please choose the item you want to delete by SKU: ");
+        HairProducts foundHairP = findHairBySku();
+        System.out.println(foundHairP);
+        isThisCorrect();
+        System.out.println(foundHairP + "\n has been deleted");
+        foundHairP.delete(foundHairP.getSku());
+    }
+
+    public void deleteMakeup() {
+        findAllMU();
+        System.out.println("Please choose the item you want to delete by SKU: ");
+        MakeUp foundMU = findMakeupBySku();
+        System.out.println(foundMU);
+        isThisCorrect();
+        System.out.println(foundMU + "\n has been deleted");
+        int sku = foundMU.getSku();
+        foundMU.delete(sku);
+
+
+    }
+
+    public void deleteProduct(){
+       int sku = 0;
+       switch (pickHairOrMakeup()) {
+           case 1:
+               deleteHair();
+               break;
+           case 2:
+                deleteMakeup();
+                break;
+           case 3:
+               mainMenuChoices();
+               break;
+           default:
+               notAValidChoice();
+               deleteProduct();
+           }
+        returnToCurrentMenu();
+        mainMenuChoices();
+       }
+
+
+    public void exit(){
         System.out.println("GoodBye!");
         System.exit(6);
         }

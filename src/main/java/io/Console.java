@@ -27,6 +27,7 @@ public class Console {
         System.out.println(""+
                 "******************************************************\n" +
                 "***               Product Use Choices              ***\n" +
+                "***       Please select from the following         ***\n" +
                 "***                                                ***\n" +
                 "***    1. Shampoo                                  ***\n" +
                 "***    2. Conditioner                              ***\n" +
@@ -41,6 +42,7 @@ public class Console {
         System.out.println(""+
                 "******************************************************\n" +
                 "***              Product Type Choices              ***\n" +
+                "***        Please select from the following        ***\n" +
                 "***                                                ***\n" +
                 "***    1. Foundation                               ***\n" +
                 "***    2. Mascara                                  ***\n" +
@@ -56,6 +58,8 @@ public class Console {
         System.out.println(""+
                 "******************************************************\n" +
                 "***                Hair Type Choices               ***\n" +
+                "***         Please select the hair type            ***\n" +
+                "***          from the following options:           ***\n" +
                 "***                                                ***\n" +
                 "***    1. Straight | 1a-1c                         ***\n" +
                 "***    2. Wavy     | 2a-2c                         ***\n" +
