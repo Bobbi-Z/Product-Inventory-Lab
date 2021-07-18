@@ -527,7 +527,8 @@ public class App {
         System.out.println(foundHairP);
         isThisCorrect();
         System.out.println(foundHairP + "\n has been deleted");
-        foundHairP.delete(foundHairP.getSku());
+        int sku = foundHairP.getSku();
+        foundHairP.delete(sku);
     }
 
     public void deleteMakeup() {

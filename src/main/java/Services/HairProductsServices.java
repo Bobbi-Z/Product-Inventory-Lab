@@ -33,9 +33,9 @@ public class HairProductsServices {
     }
 
     public boolean delete(int sku) {
-        for (int index = 0; index < inventory.size(); index++) {
-            if (inventory.get(index).getSku() == sku) {
-                inventory.remove(inventory.get(index));
+        for (HairProducts element : inventory) {
+            if (element.getSku() == sku) {
+                inventory.remove(element);
                 return true;
             }
         }
