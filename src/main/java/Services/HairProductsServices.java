@@ -41,31 +41,6 @@ public class HairProductsServices {
         }
         return false;
     }
-/*
-    public HairProducts updateQty(int sku, int newQty) {
-        HairProducts updatedProd = null;
 
-        for (int index = 0; index < inventory.size(); index++) {
-            if (inventory.get(index).getSku() == sku) {
-                inventory.get(index).setQty(newQty);
-                updatedProd = inventory.get(index);
-            }
-        }
-
-        return updatedProd;
-    }
-
-    public HairProducts updatePrice(int sku, double newPrice) {
-      HairProducts updatedProd = null;
-
-        for (int index = 0; index < inventory.size(); index++) {
-            if (inventory.get(index).getSku() == sku) {
-                inventory.get(index).setPrice(newPrice);
-                updatedProd = inventory.get(index);
-
-            }
-        }
-       return updatedProd;
-    } */
 
 }
