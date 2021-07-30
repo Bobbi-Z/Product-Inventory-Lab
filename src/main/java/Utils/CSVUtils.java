@@ -33,30 +33,6 @@ public class CSVUtils {
         w.append(sb.toString());
         //Finally append the string to the CSV file
     }
-    String csvFile = "/Users/batman/Desktop/Sneaker.csv";
-    FileWriter writer = new FileWriter(csvFile);
-    //Create a FileWriter object and pass the location of the file to write to
-
-    CSVUtils.writeLine(writer, new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));
-    //First we save the nextId value so it can be read back in we loading the data
-
-    for (Sneaker s : inventory){
-        List<String> list = new ArrayList<>();
-        //Create an ArrayList of string representations of the object data
-        list.add(String.valueOf(s.getId()));
-        list.add(s.getName());
-        list.add(s.getBrand());
-        list.add(s.getSport());
-        list.add(String.valueOf(s.getQty()));
-        list.add(String.valueOf(s.getPrice()));
-
-        CSVUtils.writeLine(writer, list);
-        //Use the CSVUtils.writeLine to save the data to file
-    }
-
-    writer.flush();
-    writer.close();
-    //Flush and close connection to the file
 
 }
 
