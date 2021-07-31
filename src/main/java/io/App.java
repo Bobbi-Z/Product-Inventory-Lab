@@ -567,6 +567,6 @@ public class App {
 
     public void exit(){
         System.out.println("GoodBye!");
-        System.exit(6);
+        System.exit(0);
         }
 }
