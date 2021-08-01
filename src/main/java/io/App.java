@@ -427,7 +427,7 @@ public class App {
 
     public HairProducts updateHairPQty() {
         findAllHair();
-        System.out.println("Please choose the item you want to update by SKU: ");
+        System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
         System.out.println(foundHairP);
         isThisCorrect();
@@ -439,7 +439,7 @@ public class App {
 
     public HairProducts updateHairPPrice() {
         findAllHair();
-        System.out.println("Please choose the item you want to update by SKU: ");
+        System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
         System.out.println(foundHairP);
         isThisCorrect();
@@ -457,6 +457,9 @@ public class App {
             case 2:
                 updateHairPPrice();
                 break;
+            case 3:
+                mainMenuChoices();
+                break;
             default:
                 notAValidChoice();
                updateHairP();
@@ -466,7 +469,7 @@ public class App {
 
         public MakeUp updateMUQty() {
             findAllMU();
-            System.out.println("Please choose the item you want to update by SKU: ");
+            System.out.println("Please choose the item you want to update by SKU");
            MakeUp foundMU = findMakeupBySku();
             System.out.println(foundMU);
             isThisCorrect();
@@ -478,7 +481,7 @@ public class App {
 
         public MakeUp updateMUPrice(){
             findAllMU();
-            System.out.println("Please choose the item you want to update by SKU: ");
+            System.out.println("Please choose the item you want to update by SKU");
             MakeUp foundMU = findMakeupBySku();
             System.out.println(foundMU);
             isThisCorrect();
@@ -496,6 +499,9 @@ public class App {
                 case 2:
                     updateMUPrice();
                     break;
+                case 3:
+                    mainMenuChoices();
+                    break;
                 default:
                     notAValidChoice();
                     updateMU();
@@ -512,6 +518,9 @@ public class App {
             case 2:
                 updateMU();
                 break;
+            case 3:
+                mainMenuChoices();
+                break;
             default:
                 notAValidChoice();
                updateExisting();
@@ -522,7 +531,7 @@ public class App {
 
     public void deleteHair() {
         findAllHair();
-        System.out.println("Please choose the item you want to delete by SKU: ");
+        System.out.println("Please choose the item you want to delete by SKU");
         HairProducts foundHairP = findHairBySku();
         System.out.println(foundHairP);
         isThisCorrect();
@@ -533,7 +542,7 @@ public class App {
 
     public void deleteMakeup() {
         findAllMU();
-        System.out.println("Please choose the item you want to delete by SKU: ");
+        System.out.println("Please choose the item you want to delete by SKU");
         MakeUp foundMU = findMakeupBySku();
         System.out.println(foundMU);
         isThisCorrect();
