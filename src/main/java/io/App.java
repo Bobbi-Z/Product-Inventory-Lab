@@ -13,8 +13,7 @@ import static io.Console.*;
 //this will initialize the logic and services, and start the program
 public class App {
 
-    private HairProductsServices hairProductsServices = new HairProductsServices();
-    private MakeUpServices makeUpServices = new MakeUpServices();
+
     //service needed to manage inventory
     public Scanner input = new Scanner(System.in);
     public int numChoice = 0;
@@ -189,7 +188,7 @@ public class App {
        int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
-       HairProducts foundHairProduct = hairProductsServices.findHairProduct(sku);
+       HairProducts foundHairProduct = HairProductsServices.findHairProduct(sku);
        if (foundHairProduct == null) {
            notAValidChoice();
            mainMenuChoices();
@@ -201,7 +200,7 @@ public class App {
         int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
-       MakeUp foundMakeUpProduct = makeUpServices.findMakeUp(sku);
+       MakeUp foundMakeUpProduct = MakeUpServices.findMakeUp(sku);
        if (foundMakeUpProduct == null) {
            notAValidChoice();
            mainMenuChoices();
@@ -378,7 +377,7 @@ public class App {
         input.nextLine();
         price = input.nextDouble();
 
-        MakeUp newlyCreated = makeUpServices.create(name, brand, type, color, qty, price);
+        MakeUp newlyCreated = MakeUpServices.create(name, brand, type, color, qty, price);
         System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
     }
 
@@ -531,7 +530,7 @@ public class App {
         isThisCorrect();
         System.out.println(foundHairP + "\n has been deleted");
         int sku = foundHairP.getSku();
-        foundHairP.delete(sku);
+        HairProductsServices.delete(sku);
     }
 
     public void deleteMakeup() {
@@ -542,7 +541,7 @@ public class App {
         isThisCorrect();
         System.out.println(foundMU + "\n has been deleted");
         int sku = foundMU.getSku();
-        foundMU.delete(sku);
+        MakeUpServices.delete(sku);
 
 
     }

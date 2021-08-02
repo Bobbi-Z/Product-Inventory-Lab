@@ -1,12 +1,13 @@
 package Models;
 
 import Services.HairProductsServices;
+import Utils.CSVUtils;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HairProducts extends HairProductsServices implements Product {
+public class HairProducts implements Product {
     private int sku;
     private String name;
     private String brand;

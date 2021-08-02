@@ -24,7 +24,7 @@ public class HairProductsServices {
         return createdHairProducts;
     }
 
-    public HairProducts findHairProduct(int sku) {
+    public static HairProducts findHairProduct(int sku) {
 
         for (HairProducts hairProducts : inventory) {
             if (hairProducts.getSku() == sku) {
@@ -38,7 +38,7 @@ public class HairProductsServices {
         return inventory;
     }
 
-    public boolean delete(int sku) {
+    public static boolean delete(int sku) {
         for (HairProducts element : inventory) {
             if (element.getSku() == sku) {
                 inventory.remove(element);
@@ -50,8 +50,8 @@ public class HairProductsServices {
 
     public static void csvHairFileSaver() throws IOException {
 
-      //  String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
-        FileWriter writer = new FileWriter("HairProduct.csv");
+       String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
+        FileWriter writer = new FileWriter(csvHFile);
         //Create a FileWriter object and pass the location of the file to write to
 
         CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextSku))));

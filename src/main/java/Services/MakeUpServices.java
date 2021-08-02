@@ -17,8 +17,8 @@ public class MakeUpServices {
 
     public static ArrayList<MakeUp> inventory = new ArrayList<>();
 
-    public MakeUp create(String name, String brand, String type,
-                         String color, int qty, double price) {
+    public static MakeUp create(String name, String brand, String type,
+                                String color, int qty, double price) {
 
         MakeUp createdMakeUp = new MakeUp(nextSku++, name, brand,
                 type, color, qty, price);
@@ -29,7 +29,7 @@ public class MakeUpServices {
     }
 
 
-    public MakeUp findMakeUp(int sku) {
+    public static MakeUp findMakeUp(int sku) {
         for (MakeUp makeUp : inventory) {
             if (makeUp.getSku() == sku) {
                 return makeUp;
@@ -43,7 +43,7 @@ public class MakeUpServices {
         return inventory;
     }
 
-    public boolean delete(int sku) {
+    public static boolean delete(int sku) {
         for (int index = 0; index < inventory.size(); index++) {
             if (inventory.get(index).getSku() == sku) {
                 inventory.remove(inventory.get(index));
@@ -54,8 +54,8 @@ public class MakeUpServices {
     }
     public static void csvMakeUpFileSaver() throws IOException {
 
-       // String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
-        FileWriter writer = new FileWriter("MakeUp.csv");
+       String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
+        FileWriter writer = new FileWriter(csvMFile);
         //Create a FileWriter object and pass the location of the file to write to
 
         CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextSku))));
