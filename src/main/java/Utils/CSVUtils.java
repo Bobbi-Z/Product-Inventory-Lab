@@ -15,7 +15,7 @@ public class CSVUtils {
     //Create a final variable to hold the comma separator
     // since we do not need this value to change
 
-    public static void writeLine(FileWriter w, List<String> values)throws IOException {
+    public static void writeLine(Writer w, List<String> values)throws IOException {
         //To make this method reusable we will pass a Writer object representing the
         // file to write to. The next parameter is a list of String objects that will
         // represent the data of the object to write to CSV format. Now, wherever we want
