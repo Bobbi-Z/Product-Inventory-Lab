@@ -5,12 +5,13 @@ import Models.HairProducts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HairProductsServicesTest {
 
     @Test
-    public void createTest() {
+    public void createTest() throws IOException {
 
         String expectedName = "Clean & Pure Nourishing Detox Shampoo";
         String expectedBrand = "Nexxus";
@@ -46,7 +47,7 @@ public class HairProductsServicesTest {
     }
 
     @Test
-    public void testFindHairProduct() {
+    public void testFindHairProduct() throws IOException {
 
         String expectedName = "Clean & Pure Nourishing Detox Shampoo";
         String expectedBrand = "Nexxus";
@@ -66,7 +67,7 @@ public class HairProductsServicesTest {
     }
 
     @Test
-    public void testFindAll() {
+    public void testFindAll() throws IOException {
 
         String expectedName = "Clean & Pure Nourishing Detox Shampoo";
         String expectedBrand = "Nexxus";
@@ -88,7 +89,7 @@ public class HairProductsServicesTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDelete() throws IOException {
         String expectedName = "Clean & Pure Nourishing Detox Shampoo";
         String expectedBrand = "Nexxus";
         String expectedUse = "Shampoo";

@@ -2,11 +2,9 @@ package Services;
 
 import Models.MakeUp;
 import Utils.CSVUtils;
+import com.opencsv.CSVWriter;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,12 +52,13 @@ public class MakeUpServices {
     }
     public static void csvMakeUpFileSaver() throws IOException {
 
-       String csvMFile = "/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
-        FileWriter writer = new FileWriter(csvMFile);
+        File csvHFile = new File ("/Users/bobbi/Dev/Product-Inventory-Lab/Makeup.csv");
+        FileWriter outPut = new FileWriter(csvHFile);
+        CSVWriter writer = new CSVWriter(outPut);
         //Create a FileWriter object and pass the location of the file to write to
 
-        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextSku))));
-        //First we save the nextId value, so it can be read back in when we're loading the data
+//        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextSku))));
+//        //First we save the nextId value, so it can be read back in when loading the data
 
         for (MakeUp mProd : inventory) {
             List<String> list = new ArrayList<>();
@@ -91,7 +90,7 @@ public class MakeUpServices {
         // and catch any exceptions that can occur. If there are problems
         // retrieving the file, the catch block will handle the exception
         try(BufferedReader br = new BufferedReader(new FileReader(csvMFile))){
-            nextSku = Integer.parseInt(br.readLine());
+           // nextSku = Integer.parseInt(br.readLine());
             //Begin setting the state of the service by reading in the
             // first line. If you remember the first line represents the
             // nextId value.

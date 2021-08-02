@@ -49,14 +49,14 @@ public class App {
 //                "Stella (Champagne Shimmer)", 10, 24.00);
 //    }
 
-    public void init() {
+    public void init() throws IOException {
         CSVUtils.loadFiles();
         Console.printWelcome();
         welcome();
 
     }
 
-    public void welcome(){
+    public void welcome() throws IOException {
         System.out.println("Enter 'm' to go to the main menu");
         if (stringInput().equals("m")) {
             mainMenuChoices();
@@ -89,7 +89,7 @@ public class App {
         stringInput();
     }
 
-     public void mainMenuChoices(){
+     public void mainMenuChoices() throws IOException {
         Console.mainMenu();
         System.out.println("Please enter your choice: ");
         switch (numberInput()) {
@@ -124,7 +124,7 @@ public class App {
         returnToCurrentMenu();
     }
 
-    public int pickHairOrMakeup() {
+    public int pickHairOrMakeup() throws IOException {
         pickHairOrMake();
         switch (numberInput()) {
             case 1: //hair products chosen
@@ -141,18 +141,19 @@ public class App {
         return numberInput();
     }
 
-    public void findAllHair(){
+    public void findAllHair() throws IOException {
         ArrayList<HairProducts> allHairProducts = HairProductsServices.findAll();
         if (HairProductsServices.inventory.isEmpty()) {
             notAValidChoice();
             mainMenuChoices();
+
         }
         for (HairProducts element : allHairProducts) {
             System.out.println(element.toString());
         }
     }
 
-    public void findAllMU(){
+    public void findAllMU() throws IOException {
         ArrayList<MakeUp> allMakeup = MakeUpServices.findAll();
         if (MakeUpServices.inventory.isEmpty()) {
             notAValidChoice();
@@ -165,7 +166,7 @@ public class App {
 
     }
 
-    public void allProductsList() {
+    public void allProductsList() throws IOException {
         switch (pickHairOrMakeup()){
             case 1:
                 findAllHair();
@@ -184,7 +185,7 @@ public class App {
         mainMenuChoices();
             }
 
-   public HairProducts findHairBySku(){
+   public HairProducts findHairBySku() throws IOException {
        int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
@@ -196,7 +197,7 @@ public class App {
        return foundHairProduct;
     }
 
-   public MakeUp findMakeupBySku(){
+   public MakeUp findMakeupBySku() throws IOException {
         int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
@@ -208,7 +209,7 @@ public class App {
         return foundMakeUpProduct;
    }
 
-    public void searchBySku() {
+    public void searchBySku() throws IOException {
         switch (pickHairOrMakeup()) {
             case 1:
                 System.out.println(findHairBySku());
@@ -227,7 +228,7 @@ public class App {
         searchBySku();
     }
 
-    public String hairProductUse(){
+    public String hairProductUse() throws IOException {
         Console.productUse();
         String resultOfUseChoice = "";
         switch (numberInput()){
@@ -255,7 +256,7 @@ public class App {
      return  resultOfUseChoice;
     }
 
-    public String hairTypeSelection(){
+    public String hairTypeSelection() throws IOException {
         Console.hairType();
         String resultOfTypeChoice = "";
 
@@ -284,7 +285,7 @@ public class App {
     }
 
 
-    public void addHair(){
+    public void addHair() throws IOException {
         String name;
         String brand;
         String use;
@@ -317,7 +318,7 @@ public class App {
         System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
     }
 
-    public String makeupTypeSelection(){
+    public String makeupTypeSelection() throws IOException {
         Console.makeUpType();
         System.out.println("Please select the product type from the following options: ");
         String resultOfMakeupTypeChoice = "";
@@ -350,7 +351,7 @@ public class App {
 
 
 
-    public void addMakeup(){
+    public void addMakeup() throws IOException {
         String name;
         String brand;
         String type;
@@ -382,7 +383,7 @@ public class App {
     }
 
 
-    public void addNewProduct() {
+    public void addNewProduct() throws IOException {
         switch (pickHairOrMakeup()){
             case 1:
             addHair();
@@ -401,7 +402,7 @@ public class App {
         addNewProduct();
     }
 
-   public void isThisCorrect(){
+   public void isThisCorrect() throws IOException {
         correctYesOrNo();
        System.out.println("Is this the correct product you want to update?");
        switch (stringInput()){
@@ -422,7 +423,7 @@ public class App {
         return numberInput();
     }
 
-    public void updateHairPQty() {
+    public void updateHairPQty() throws IOException {
         findAllHair();
         System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
@@ -433,7 +434,7 @@ public class App {
         System.out.println("The updated product is: \n" + foundHairP);
     }
 
-    public void updateHairPPrice() {
+    public void updateHairPPrice() throws IOException {
         findAllHair();
         System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
@@ -444,7 +445,7 @@ public class App {
         System.out.println("The updated product is \n" + foundHairP);
 
     }
-    public void updateHairP() {
+    public void updateHairP() throws IOException {
         switch (changePriceOrQty()) {
             case 1:
                 updateHairPQty();
@@ -462,7 +463,7 @@ public class App {
         updateExisting();
     }
 
-        public void updateMUQty() {
+        public void updateMUQty() throws IOException {
             findAllMU();
             System.out.println("Please choose the item you want to update by SKU");
            MakeUp foundMU = findMakeupBySku();
@@ -473,7 +474,7 @@ public class App {
             System.out.println("The updated product is: \n" + foundMU);
         }
 
-        public void updateMUPrice(){
+        public void updateMUPrice() throws IOException {
             findAllMU();
             System.out.println("Please choose the item you want to update by SKU");
             MakeUp foundMU = findMakeupBySku();
@@ -484,7 +485,7 @@ public class App {
             System.out.println("The updated product is \n" + foundMU);
         }
 
-        public void updateMU() {
+        public void updateMU() throws IOException {
             switch (changePriceOrQty()) {
                 case 1:
                     updateMUQty();
@@ -503,7 +504,7 @@ public class App {
         }
 
 
-    public void updateExisting(){
+    public void updateExisting() throws IOException {
         switch (pickHairOrMakeup()){
             case 1:
                 updateHairP();
@@ -522,7 +523,7 @@ public class App {
         mainMenuChoices();
     }
 
-    public void deleteHair() {
+    public void deleteHair() throws IOException {
         findAllHair();
         System.out.println("Please choose the item you want to delete by SKU");
         HairProducts foundHairP = findHairBySku();
@@ -533,7 +534,7 @@ public class App {
         HairProductsServices.delete(sku);
     }
 
-    public void deleteMakeup() {
+    public void deleteMakeup() throws IOException {
         findAllMU();
         System.out.println("Please choose the item you want to delete by SKU");
         MakeUp foundMU = findMakeupBySku();
@@ -546,7 +547,7 @@ public class App {
 
     }
 
-    public void deleteProduct(){
+    public void deleteProduct() throws IOException {
         switch (pickHairOrMakeup()) {
            case 1:
                deleteHair();
