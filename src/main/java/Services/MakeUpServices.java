@@ -54,7 +54,7 @@ public class MakeUpServices {
     }
     public static void csvMakeUpFileSaver() throws IOException {
 
-       String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
+       String csvMFile = "/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
         FileWriter writer = new FileWriter(csvMFile);
         //Create a FileWriter object and pass the location of the file to write to
 
@@ -83,14 +83,14 @@ public class MakeUpServices {
     }
     public static void loadMUData(){
         //Set up some values to be used later
-        //String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
+        String csvMFile = "/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
         String line;
         String csvSplitBy = ",";
 
         //We use a try with resources block to create a new BufferedReader
         // and catch any exceptions that can occur. If there are problems
         // retrieving the file, the catch block will handle the exception
-        try(BufferedReader br = new BufferedReader(new FileReader("MakeUp.csv"))){
+        try(BufferedReader br = new BufferedReader(new FileReader(csvMFile))){
             nextSku = Integer.parseInt(br.readLine());
             //Begin setting the state of the service by reading in the
             // first line. If you remember the first line represents the

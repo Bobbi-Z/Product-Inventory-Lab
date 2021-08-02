@@ -50,7 +50,7 @@ public class HairProductsServices {
 
     public static void csvHairFileSaver() throws IOException {
 
-       String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
+       String csvHFile = "/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
         FileWriter writer = new FileWriter(csvHFile);
         //Create a FileWriter object and pass the location of the file to write to
 
@@ -80,14 +80,14 @@ public class HairProductsServices {
 
     public static void loadHData(){
         //Set up some values to be used later
-       // String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
+       String csvHFile = "/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
         String line;
         String csvSplitBy = ",";
 
         //We use a try with resources block to create a new BufferedReader
         // and catch any exceptions that can occur. If there are problems
         // retrieving the file, the catch block will handle the exception
-        try(BufferedReader br = new BufferedReader(new FileReader("HairProduct.csv"))){
+        try(BufferedReader br = new BufferedReader(new FileReader(csvHFile))){
             nextSku = Integer.parseInt(br.readLine());
             //Begin setting the state of the service by reading in the
             // first line. If you remember the first line represents the
