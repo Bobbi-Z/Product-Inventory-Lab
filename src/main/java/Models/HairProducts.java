@@ -1,8 +1,12 @@
 package Models;
 
 import Services.HairProductsServices;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class HairProducts extends HairProductsServices {
+public class HairProducts extends HairProductsServices implements Product {
     private int sku;
     private String name;
     private String brand;
@@ -26,11 +30,11 @@ public class HairProducts extends HairProductsServices {
     setPrice(price);
     }
 
-    public void setSku(Integer sku) {
+    public void setSku(int sku) {
     this.sku = sku;
     }
 
-    public  Integer getSku() {
+    public  int getSku() {
         return sku;
     }
 
@@ -74,13 +78,15 @@ public class HairProducts extends HairProductsServices {
         return qty;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
+
+
 
     @Override
     public String toString(){

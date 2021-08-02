@@ -17,7 +17,7 @@ public class HairProductsServices {
 
     public static ArrayList<HairProducts> inventory = new ArrayList<>();
 
-    public HairProducts create(String name, String brand, String use, String typesOfHair, int qty, double price)  {
+    public static HairProducts create(String name, String brand, String use, String typesOfHair, int qty, double price)  {
         HairProducts createdHairProducts = new HairProducts(nextSku++, name, brand, use, typesOfHair, qty, price);
 
         inventory.add(createdHairProducts);
@@ -80,14 +80,14 @@ public class HairProductsServices {
 
     public static void loadHData(){
         //Set up some values to be used later
-        String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
+       // String csvHFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/HairProduct.csv";
         String line;
         String csvSplitBy = ",";
 
         //We use a try with resources block to create a new BufferedReader
         // and catch any exceptions that can occur. If there are problems
         // retrieving the file, the catch block will handle the exception
-        try(BufferedReader br = new BufferedReader(new FileReader(csvHFile))){
+        try(BufferedReader br = new BufferedReader(new FileReader("HairProduct.csv"))){
             nextSku = Integer.parseInt(br.readLine());
             //Begin setting the state of the service by reading in the
             // first line. If you remember the first line represents the

@@ -26,8 +26,8 @@ public class App {
        // application.testInventory();
         application.init();
         //a method to initialize the application
-        CSVUtils.writeHFiles();
-        CSVUtils.writeMFiles();
+        CSVUtils.writeFiles();
+
     }
 //    public void testInventory(){
 //        hairProductsServices.create("Clean & Pure Nourishing Detox Shampoo", "Nexxus",
@@ -51,8 +51,7 @@ public class App {
 //    }
 
     public void init() {
-        CSVUtils.loadHFiles();
-        CSVUtils.loadMFiles();
+        CSVUtils.loadFiles();
         Console.printWelcome();
         welcome();
 
@@ -78,8 +77,8 @@ public class App {
       //  input.nextLine();
         clientInput = input.next();
         return clientInput;
-
     }
+
     public void returnToCurrentMenu() {
         System.out.println("Enter 'r' to return");
         if (stringInput().equals("r")) {
@@ -314,7 +313,7 @@ public class App {
         price = input.nextDouble();
 
 
-        HairProducts newlyCreated = hairProductsServices.create(name, brand, use, typeOfHair,
+        HairProducts newlyCreated = HairProductsServices.create(name, brand, use, typeOfHair,
                 qty, price);
         System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
     }

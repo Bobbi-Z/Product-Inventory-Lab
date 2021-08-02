@@ -1,8 +1,12 @@
 package Models;
 
 import Services.MakeUpServices;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class MakeUp extends MakeUpServices {
+public class MakeUp extends MakeUpServices implements Product{
     private int sku;
     private String name;
     private String brand;
@@ -26,11 +30,11 @@ public class MakeUp extends MakeUpServices {
     }
 
 
-    public void setSku(Integer sku) {
+    public void setSku(int sku) {
         this.sku = sku;
     }
 
-    public Integer getSku() {
+    public int getSku() {
         return sku;
     }
 
@@ -66,19 +70,19 @@ public class MakeUp extends MakeUpServices {
         return color;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 
-    public Integer getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
