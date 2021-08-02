@@ -4,13 +4,10 @@ import Models.HairProducts;
 import Models.MakeUp;
 import Services.HairProductsServices;
 import Services.MakeUpServices;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
+import Utils.CSVUtils;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
-
 import static io.Console.*;
 
 //this will initialize the logic and services, and start the program
@@ -23,46 +20,49 @@ public class App {
     public int numChoice = 0;
     public String clientInput = "";
 
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
         App application = new App();
         //Instantiate the application
-        application.testInventory();
+       // application.testInventory();
         application.init();
         //a method to initialize the application
+        CSVUtils.writeHFiles();
+        CSVUtils.writeMFiles();
     }
-    public void testInventory(){
-        hairProductsServices.create("Clean & Pure Nourishing Detox Shampoo", "Nexxus",
-                "Shampoo", "Straight | 1a-1c", 10, 26.99);
-        hairProductsServices.create("Humectress Moisture Conditioner for Normal to Dry Hair",
-                "Nexxus", "Conditioner", "Straight | 1a-1c", 10, 26.99);
-        hairProductsServices.create("Silk Express Miracle Silk Hair Mask", "It's A 10",
-                "Mask", "Straight | 1a-1c", 10, 36.99);
-        hairProductsServices.create("Ghost Weightless Hair Oil", "Verb", "Style",
-                "Straight | 1a-1c", 10, 18.00);
-        makeUpServices.create("Complexion Rescue Tinted Hydrating Gel Cream Broad Spectrum SPF 30",
-                "bareMinerals", "foundation", "Opal 01", 10, 33.00);
-        makeUpServices.create("Better Than Sex Volumizing Mascara", "Too Faced", "Mascara",
-                "Black", 10, 26.00);
-        makeUpServices.create("24/7 Glide-On Waterproof Eyeliner Pencil", "Urban Decay",
-                "Eyeliner", "Yeyo (metallic white shimmer)", 10, 22.00 );
-        makeUpServices.create("Lip Glowy Balm", "Laneige", "Lip gloss", "Berry",
-                10, 17.00);
-        makeUpServices.create("Brilliant Eye Brightener", "Thrive", "Highlighter",
-                "Stella (Champagne Shimmer)", 10, 24.00);
-    }
+//    public void testInventory(){
+//        hairProductsServices.create("Clean & Pure Nourishing Detox Shampoo", "Nexxus",
+//                "Shampoo", "Straight | 1a-1c", 10, 26.99);
+//        hairProductsServices.create("Humectress Moisture Conditioner for Normal to Dry Hair",
+//                "Nexxus", "Conditioner", "Straight | 1a-1c", 10, 26.99);
+//        hairProductsServices.create("Silk Express Miracle Silk Hair Mask", "It's A 10",
+//                "Mask", "Straight | 1a-1c", 10, 36.99);
+//        hairProductsServices.create("Ghost Weightless Hair Oil", "Verb", "Style",
+//                "Straight | 1a-1c", 10, 18.00);
+//        makeUpServices.create("Complexion Rescue Tinted Hydrating Gel Cream Broad Spectrum SPF 30",
+//                "bareMinerals", "foundation", "Opal 01", 10, 33.00);
+//        makeUpServices.create("Better Than Sex Volumizing Mascara", "Too Faced", "Mascara",
+//                "Black", 10, 26.00);
+//        makeUpServices.create("24/7 Glide-On Waterproof Eyeliner Pencil", "Urban Decay",
+//                "Eyeliner", "Yeyo (metallic white shimmer)", 10, 22.00 );
+//        makeUpServices.create("Lip Glowy Balm", "Laneige", "Lip gloss", "Berry",
+//                10, 17.00);
+//        makeUpServices.create("Brilliant Eye Brightener", "Thrive", "Highlighter",
+//                "Stella (Champagne Shimmer)", 10, 24.00);
+//    }
 
     public void init() {
+        CSVUtils.loadHFiles();
+        CSVUtils.loadMFiles();
         Console.printWelcome();
         welcome();
+
     }
 
     public void welcome(){
         System.out.println("Enter 'm' to go to the main menu");
-        switch (stringInput()){
-            case "m":
+        if (stringInput().equals("m")) {
             mainMenuChoices();
-            break;
-            default:
+        }else{
             notAValidChoice();
             welcome();
         }
@@ -80,17 +80,17 @@ public class App {
         return clientInput;
 
     }
-    public String returnToCurrentMenu() {
+    public void returnToCurrentMenu() {
         System.out.println("Enter 'r' to return");
-        switch (stringInput()) {
-            case "r":
-            return "r";
-            default:
+        if (stringInput().equals("r")) {
+            return;
+        }else{
             notAValidChoice();
             returnToCurrentMenu();
         }
-        return stringInput();
+        stringInput();
     }
+
      public void mainMenuChoices(){
         Console.mainMenu();
         System.out.println("Please enter your choice: ");
@@ -121,9 +121,9 @@ public class App {
 
     }
 
-    public String notAValidChoice(){
+    public void notAValidChoice(){
         System.out.println("That is not a valid choice");
-        return  returnToCurrentMenu();
+        returnToCurrentMenu();
     }
 
     public int pickHairOrMakeup() {
@@ -144,8 +144,8 @@ public class App {
     }
 
     public void findAllHair(){
-        ArrayList<HairProducts> allHairProducts = hairProductsServices.findAll();
-        if (hairProductsServices.inventory.isEmpty()) {
+        ArrayList<HairProducts> allHairProducts = HairProductsServices.findAll();
+        if (HairProductsServices.inventory.isEmpty()) {
             notAValidChoice();
             mainMenuChoices();
         }
@@ -155,8 +155,8 @@ public class App {
     }
 
     public void findAllMU(){
-        ArrayList<MakeUp> allMakeup = makeUpServices.findAll();
-        if (makeUpServices.inventory.isEmpty()) {
+        ArrayList<MakeUp> allMakeup = MakeUpServices.findAll();
+        if (MakeUpServices.inventory.isEmpty()) {
             notAValidChoice();
             mainMenuChoices();
         }
@@ -187,7 +187,7 @@ public class App {
             }
 
    public HairProducts findHairBySku(){
-       int sku = 0;
+       int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
        HairProducts foundHairProduct = hairProductsServices.findHairProduct(sku);
@@ -199,7 +199,7 @@ public class App {
     }
 
    public MakeUp findMakeupBySku(){
-        int sku = 0;
+        int sku;
        System.out.println("Please enter sku: ");
        sku = numberInput();
        MakeUp foundMakeUpProduct = makeUpServices.findMakeUp(sku);
@@ -287,12 +287,12 @@ public class App {
 
 
     public void addHair(){
-        String name = "";
-        String brand = "";
-        String use = "";
-        String typeOfHair = "";
-        Integer qty = 0;
-        double price = 0;
+        String name;
+        String brand;
+        String use;
+        String typeOfHair;
+        int qty;
+        double price;
 
         System.out.println("Please fill in the required information.");
         System.out.println("Product name: ");
@@ -353,12 +353,12 @@ public class App {
 
 
     public void addMakeup(){
-        String name = "";
-        String brand = "";
-        String type = "";
-        String color = "";
-        Integer qty = 0;
-        double price = 0;
+        String name;
+        String brand;
+        String type;
+        String color;
+        int qty;
+        double price;
 
         System.out.println("Please fill in the required information.");
         System.out.println("Product name: ");
@@ -403,7 +403,7 @@ public class App {
         addNewProduct();
     }
 
-   public String isThisCorrect(){
+   public void isThisCorrect(){
         correctYesOrNo();
        System.out.println("Is this the correct product you want to update?");
        switch (stringInput()){
@@ -416,7 +416,6 @@ public class App {
                notAValidChoice();
                isThisCorrect();
        }
-       return "y";
    }
 
     public int changePriceOrQty() {
@@ -425,7 +424,7 @@ public class App {
         return numberInput();
     }
 
-    public HairProducts updateHairPQty() {
+    public void updateHairPQty() {
         findAllHair();
         System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
@@ -434,10 +433,9 @@ public class App {
         System.out.println("Please enter in the new quantity: ");
         foundHairP.setQty(numberInput());
         System.out.println("The updated product is: \n" + foundHairP);
-        return foundHairP;
     }
 
-    public HairProducts updateHairPPrice() {
+    public void updateHairPPrice() {
         findAllHair();
         System.out.println("Please choose the item you want to update by SKU");
         HairProducts foundHairP = findHairBySku();
@@ -446,7 +444,6 @@ public class App {
         System.out.println("Please enter in the new price formatted as 0.00: ");
         foundHairP.setPrice(input.nextDouble());
         System.out.println("The updated product is \n" + foundHairP);
-        return foundHairP;
 
     }
     public void updateHairP() {
@@ -467,7 +464,7 @@ public class App {
         updateExisting();
     }
 
-        public MakeUp updateMUQty() {
+        public void updateMUQty() {
             findAllMU();
             System.out.println("Please choose the item you want to update by SKU");
            MakeUp foundMU = findMakeupBySku();
@@ -476,10 +473,9 @@ public class App {
             System.out.println("Please enter in the new quantity: ");
             foundMU.setQty(numberInput());
             System.out.println("The updated product is: \n" + foundMU);
-            return foundMU;
         }
 
-        public MakeUp updateMUPrice(){
+        public void updateMUPrice(){
             findAllMU();
             System.out.println("Please choose the item you want to update by SKU");
             MakeUp foundMU = findMakeupBySku();
@@ -488,7 +484,6 @@ public class App {
             System.out.println("Please enter in the new price formatted as 0.00: ");
             foundMU.setPrice(input.nextDouble());
             System.out.println("The updated product is \n" + foundMU);
-            return foundMU;
         }
 
         public void updateMU() {
@@ -554,8 +549,7 @@ public class App {
     }
 
     public void deleteProduct(){
-       int sku = 0;
-       switch (pickHairOrMakeup()) {
+        switch (pickHairOrMakeup()) {
            case 1:
                deleteHair();
                break;

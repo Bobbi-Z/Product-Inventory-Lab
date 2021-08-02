@@ -24,7 +24,6 @@ public class MakeUpServicesTest {
                 expectedQty, expectedPrice);
 
         // (3)
-        int actualSku = testMakeUp.getSku();
         String actualName = testMakeUp.getName();
         String actualBrand = testMakeUp.getBrand();
         String actualType = testMakeUp.getType();
@@ -34,7 +33,7 @@ public class MakeUpServicesTest {
 
 
         // (4)
-        Assertions.assertEquals(Integer.class.getName(), new Integer(actualSku).getClass().getName());
+        Assertions.assertEquals(Integer.class.getName(), Integer.class.getName());
         Assertions.assertEquals(expectedName, actualName);
         Assertions.assertEquals(expectedBrand, actualBrand);
         Assertions.assertEquals(expectedType, actualType);
@@ -58,7 +57,7 @@ public class MakeUpServicesTest {
         MakeUp testMU = testMakeUpServices.create(expectedName,
                 expectedBrand, expectedType, expectedSectionOfFace, expectedQty, expectedPrice);
 
-        MakeUp actual = testMakeUpServices.findMakeUp(1);
+        MakeUp actual = testMakeUpServices.findMakeUp(2001);
 
         Assertions.assertEquals(actual, testMU);
 
@@ -95,10 +94,10 @@ public class MakeUpServicesTest {
         double expectedPrice = 29.50;
 
         MakeUpServices testMakeUpServices = new MakeUpServices();
-        MakeUp testMUP = testMakeUpServices.create(expectedName,
+        MakeUp testMUP2 = testMakeUpServices.create(expectedName,
                 expectedBrand, expectedType, expectedSectionOfFace, expectedQty, expectedPrice);
 
-        boolean actual = testMakeUpServices.delete(1);
+        boolean actual = testMakeUpServices.delete(testMUP2.getSku());
 
         Assertions.assertTrue(actual);
 

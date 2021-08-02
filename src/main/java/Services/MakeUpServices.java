@@ -1,6 +1,5 @@
 package Services;
 
-import Models.HairProducts;
 import Models.MakeUp;
 import Utils.CSVUtils;
 
@@ -31,16 +30,16 @@ public class MakeUpServices {
 
 
     public MakeUp findMakeUp(int sku) {
-        for (int index = 0; index < inventory.size(); index++) {
-            if (inventory.get(index).getSku() == sku) {
-                return inventory.get(index);
+        for (MakeUp makeUp : inventory) {
+            if (makeUp.getSku() == sku) {
+                return makeUp;
 
             }
         }
         return null;
     }
 
-    public ArrayList<MakeUp> findAll() {
+    public static ArrayList<MakeUp> findAll() {
         return inventory;
     }
 
@@ -55,12 +54,12 @@ public class MakeUpServices {
     }
     public static void csvMakeUpFileSaver() throws IOException {
 
-        String csvMFile = "/Users/bobbi/Desktop/MakeUp.csv";
-        FileWriter writer = new FileWriter(csvMFile);
+       // String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
+        FileWriter writer = new FileWriter("MakeUp.csv");
         //Create a FileWriter object and pass the location of the file to write to
 
-        CSVUtils.writeLine(writer, new ArrayList<String>(Arrays.asList(String.valueOf(nextSku))));
-        //First we save the nextId value so it can be read back in we loading the data
+        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextSku))));
+        //First we save the nextId value, so it can be read back in when we're loading the data
 
         for (MakeUp mProd : inventory) {
             List<String> list = new ArrayList<>();
@@ -82,10 +81,10 @@ public class MakeUpServices {
         writer.close();
         //Flush and close connection to the file
     }
-    private void loadMUData(){
+    public static void loadMUData(){
         //Set up some values to be used later
-        String csvMFile = "/Users/bobbi/Desktop/MakeUp.csv";
-        String line = "";
+        String csvMFile = "MacHD/Users/bobbi/Dev/Product-Inventory-Lab/MakeUp.csv";
+        String line;
         String csvSplitBy = ",";
 
         //We use a try with resources block to create a new BufferedReader
@@ -112,7 +111,7 @@ public class MakeUpServices {
                 int qty = Integer.parseInt(makeup[5]);
                 double price = Double.parseDouble(makeup[6]);
 
-                //Finally create a new item using the CSV data to set the
+                //Finally, create a new item using the CSV data to set the
                 // initial state and add it to the inventory.
 
                 inventory.add(new MakeUp(sku, name, brand, type, color, qty, price));

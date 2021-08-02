@@ -30,7 +30,7 @@ public class HairProducts extends HairProductsServices {
     this.sku = sku;
     }
 
-    public Integer getSku() {
+    public  Integer getSku() {
         return sku;
     }
 
