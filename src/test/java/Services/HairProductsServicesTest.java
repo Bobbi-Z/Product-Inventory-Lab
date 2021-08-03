@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HairProductsServicesTest {
 
@@ -83,7 +84,7 @@ public class HairProductsServicesTest {
         ArrayList<HairProducts> hairArray = new ArrayList<>();
         hairArray.add(testHairAP2);
 
-        ArrayList<HairProducts> expected = testHairProductServices.findAll();
+        List<HairProducts> expected = testHairProductServices.findAll();
 
         Assertions.assertEquals(hairArray, expected);
     }

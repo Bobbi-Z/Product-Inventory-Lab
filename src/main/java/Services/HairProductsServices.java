@@ -2,29 +2,33 @@ package Services;
 
 import Models.HairProducts;
 import Utils.CSVUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.opencsv.CSVWriter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HairProductsServices {
 
     private static int nextSku = 1000;
 
-    public static ArrayList<HairProducts> inventory = new ArrayList<>();
+    public static List<HairProducts> inventory = new ArrayList<>();
 
     public static HairProducts create(String name, String brand, String use, String typesOfHair, int qty, double price) throws IOException {
-        HairProducts createdHairProducts = new HairProducts(nextSku++, name, brand, use, typesOfHair, qty, price);
 
+        HairProducts createdHairProducts = new HairProducts(nextSku++, name, brand, use, typesOfHair, qty, price);
         inventory.add(createdHairProducts);
-        csvHairFileSaver();
+        writeJSON();
+       // csvHairFileSaver();
         return createdHairProducts;
     }
 
-    public static HairProducts findHairProduct(int sku) {
-
+    public static HairProducts findHairProduct(int sku)  {
         for (HairProducts hairProducts : inventory) {
             if (hairProducts.getSku() == sku) {
                 return hairProducts;
@@ -33,7 +37,7 @@ public class HairProductsServices {
         return null;
     }
 
-    public static ArrayList<HairProducts> findAll() {
+    public static List<HairProducts> findAll() {
         return inventory;
     }
 
@@ -121,4 +125,29 @@ public class HairProductsServices {
         }
     }
 
+    public static void readJSON()  {
+        ObjectMapper hairObjectMapper = new ObjectMapper();
+        try {
+            inventory = hairObjectMapper.readValue(new File("hairproduct.json"), new TypeReference<List<HairProducts>>(){});
+        } catch (IOException ignored) {
+
+        }
+    }
+
+    public static void writeJSON() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        writer.writeValue(new File("hairproduct.json"), inventory);
+
+    }
+
+    public static void updateJSON(HairProducts h, int sku) throws IOException {
+        sku = h.getSku();
+        ObjectMapper old = new ObjectMapper();
+        File importedJSON = new File("hairproduct.json");
+       // ObjectReader findOld = new ObjectReader(old, importedJSON);
+
+
+
+    }
 }

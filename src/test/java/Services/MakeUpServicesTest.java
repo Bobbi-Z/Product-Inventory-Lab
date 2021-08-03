@@ -4,12 +4,14 @@ import Models.MakeUp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MakeUpServicesTest {
 
     @Test
-    public void createTest(){
+    public void createTest() throws IOException {
 
         String expectedName = "Eaze Drop Blurring Skin Tint";
         String expectedBrand = "Fenty Beauty";
@@ -44,7 +46,7 @@ public class MakeUpServicesTest {
     }
 
     @Test
-    public void testFindMakeUp(){
+    public void testFindMakeUp() throws IOException {
 
         String expectedName = "Eaze Drop Blurring Skin Tint";
         String expectedBrand = "Fenty Beauty";
@@ -64,7 +66,7 @@ public class MakeUpServicesTest {
     }
 
     @Test
-    public void testFindAll(){
+    public void testFindAll() throws IOException {
 
         String expectedName = "Eaze Drop Blurring Skin Tint";
         String expectedBrand = "Fenty Beauty";
@@ -80,12 +82,12 @@ public class MakeUpServicesTest {
         ArrayList<MakeUp> makeUpArray = new ArrayList<>();
         makeUpArray.add(testMakeU);
 
-        ArrayList<MakeUp> expected = testMakeUpServices.findAll();
+        List<MakeUp> expected = testMakeUpServices.findAll();
 
         Assertions.assertEquals(makeUpArray, expected);
     }
     @Test
-    public void testDelete(){
+    public void testDelete() throws IOException {
         String expectedName = "Eaze Drop Blurring Skin Tint";
         String expectedBrand = "Fenty Beauty";
         String expectedType = "Foundation";

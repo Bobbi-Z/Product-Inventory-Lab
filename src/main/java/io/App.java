@@ -4,9 +4,9 @@ import Models.HairProducts;
 import Models.MakeUp;
 import Services.HairProductsServices;
 import Services.MakeUpServices;
-import Utils.CSVUtils;
+
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import static io.Console.*;
 
@@ -15,7 +15,7 @@ public class App {
 
 
     //service needed to manage inventory
-    public Scanner input = new Scanner(System.in);
+  //  public Scanner input = new Scanner(System.in);
     public int numChoice = 0;
     public String clientInput = "";
 
@@ -25,7 +25,7 @@ public class App {
        // application.testInventory();
         application.init();
         //a method to initialize the application
-        CSVUtils.writeFiles();
+      //  CSVUtils.writeFiles();
 
     }
 //    public void testInventory(){
@@ -50,7 +50,9 @@ public class App {
 //    }
 
     public void init() throws IOException {
-        CSVUtils.loadFiles();
+      MakeUpServices.readJSON();
+      HairProductsServices.readJSON();
+        // CSVUtils.loadFiles();
         Console.printWelcome();
         welcome();
 
@@ -67,14 +69,20 @@ public class App {
     }
 
     public int numberInput(){
-       // input.nextLine();
+         Scanner input = new Scanner(System.in);
            numChoice = input.nextInt();
            return numChoice;
     }
 
+    public double priceInput(){
+        Scanner input = new Scanner(System.in);
+        double choice = input.nextDouble();
+        return choice;
+    }
+
     public String stringInput(){
-      //  input.nextLine();
-        clientInput = input.next();
+        Scanner input = new Scanner(System.in);
+        clientInput = input.nextLine();
         return clientInput;
     }
 
@@ -142,7 +150,7 @@ public class App {
     }
 
     public void findAllHair() throws IOException {
-        ArrayList<HairProducts> allHairProducts = HairProductsServices.findAll();
+        List<HairProducts> allHairProducts = HairProductsServices.findAll();
         if (HairProductsServices.inventory.isEmpty()) {
             notAValidChoice();
             mainMenuChoices();
@@ -154,7 +162,7 @@ public class App {
     }
 
     public void findAllMU() throws IOException {
-        ArrayList<MakeUp> allMakeup = MakeUpServices.findAll();
+        List<MakeUp> allMakeup = MakeUpServices.findAll();
         if (MakeUpServices.inventory.isEmpty()) {
             notAValidChoice();
             mainMenuChoices();
@@ -284,6 +292,16 @@ public class App {
         return resultOfTypeChoice;
     }
 
+    public String addHairProdName() {
+        System.out.println("Product name: ");
+        return stringInput();
+    }
+
+    public String addHProdBrand(){
+        System.out.println("Brand of product: ");
+        return stringInput();
+    }
+
 
     public void addHair() throws IOException {
         String name;
@@ -294,23 +312,16 @@ public class App {
         double price;
 
         System.out.println("Please fill in the required information.");
-        System.out.println("Product name: ");
-        name = stringInput();
 
-        System.out.println("Brand of product: ");
-        brand = stringInput();
-
+       name = addHairProdName();
+        brand = addHProdBrand();
         use = hairProductUse();
-
         typeOfHair = hairTypeSelection();
-
-
         System.out.println("Please enter the quantity: ");
         qty = numberInput();
-
         System.out.println("Please enter the price in format example 0.00: ");
-        input.nextLine();
-        price = input.nextDouble();
+
+        price = priceInput();
 
 
         HairProducts newlyCreated = HairProductsServices.create(name, brand, use, typeOfHair,
@@ -338,6 +349,7 @@ public class App {
                     break;
                 case 5:
                     resultOfMakeupTypeChoice = "Lip Gloss";
+                    break;
                 case 6:
                     addNewProduct();
                     break;
@@ -375,8 +387,7 @@ public class App {
         qty = numberInput();
 
         System.out.println("Please enter the price in format example 0.00: ");
-        input.nextLine();
-        price = input.nextDouble();
+        price = priceInput();
 
         MakeUp newlyCreated = MakeUpServices.create(name, brand, type, color, qty, price);
         System.out.println("The product you have created is: \n *** " + newlyCreated + " ***");
@@ -441,10 +452,11 @@ public class App {
         System.out.println(foundHairP);
         isThisCorrect();
         System.out.println("Please enter in the new price formatted as 0.00: ");
-        foundHairP.setPrice(input.nextDouble());
+        foundHairP.setPrice(priceInput());
         System.out.println("The updated product is \n" + foundHairP);
 
     }
+
     public void updateHairP() throws IOException {
         switch (changePriceOrQty()) {
             case 1:
@@ -481,7 +493,7 @@ public class App {
             System.out.println(foundMU);
             isThisCorrect();
             System.out.println("Please enter in the new price formatted as 0.00: ");
-            foundMU.setPrice(input.nextDouble());
+            foundMU.setPrice(priceInput());
             System.out.println("The updated product is \n" + foundMU);
         }
 

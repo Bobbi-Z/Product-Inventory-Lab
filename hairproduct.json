@@ -1,0 +1,33 @@
+[ {
+  "sku" : 1000,
+  "name" : "Clean & Pure Nourishing Detox Shampoo",
+  "brand" : "Nexxus",
+  "use" : "Shampoo",
+  "typeOfHair" : "Straight | 1a-1c",
+  "qty" : 10,
+  "price" : 26.99
+}, {
+  "sku" : 1001,
+  "name" : "Humectress Moisture Conditioner for Normal to Dry Hair",
+  "brand" : "Nexxus",
+  "use" : "Conditioner",
+  "typeOfHair" : "Straight | 1a-1c",
+  "qty" : 10,
+  "price" : 26.99
+}, {
+  "sku" : 1002,
+  "name" : "Silk Express Miracle Silk Hair Mask",
+  "brand" : "It's A 10",
+  "use" : "Mask",
+  "typeOfHair" : "Straight | 1a-1c",
+  "qty" : 10,
+  "price" : 36.99
+}, {
+  "sku" : 1003,
+  "name" : "Ghost Weightless Hair Oil",
+  "brand" : "Verb",
+  "use" : "Style",
+  "typeOfHair" : "Straight | 1a-1c",
+  "qty" : 10,
+  "price" : 18.0
+} ]
