@@ -1,6 +1,13 @@
 package Models;
 
-public class HairProducts {
+import Services.HairProductsServices;
+import Utils.CSVUtils;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class HairProducts implements Product {
     private int sku;
     private String name;
     private String brand;
@@ -24,11 +31,11 @@ public class HairProducts {
     setPrice(price);
     }
 
-    public void setSku(Integer sku) {
+    public void setSku(int sku) {
     this.sku = sku;
     }
 
-    public Integer getSku() {
+    public  int getSku() {
         return sku;
     }
 
@@ -64,19 +71,29 @@ public class HairProducts {
         return typeOfHair;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(int qty){
         this.qty = qty;
     }
 
-    public Integer getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
+
+
+
+    @Override
+    public String toString(){
+        return "***     SKU: " + this.getSku() + "| Name: " + this.getName() +
+                "| Brand: " + this.getBrand() + "| Use: " + this.getUse() +
+                "| Hair Type: " + this.getTypeOfHair() + "| Quantity: " + this.getQty() +
+                "| Price: " + this.getPrice() + "|     ***";
+}
 }

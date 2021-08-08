@@ -1,11 +1,18 @@
 package Models;
 
-public class MakeUp {
+import Services.MakeUpServices;
+import Utils.CSVUtils;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class MakeUp implements Product{
     private int sku;
     private String name;
     private String brand;
     private String type;
-    private String sectionOfFace;
+    private String color;
     private int qty;
     private double price;
 
@@ -13,22 +20,22 @@ public class MakeUp {
     }
 
     public MakeUp(int sku, String name, String brand, String type,
-                  String sectionOfFace, int qty, double price) {
+                  String color, int qty, double price) {
     setSku(sku);
     setName(name);
     setBrand(brand);
     setType(type);
-    setSectionOfFace(sectionOfFace);
+    setColor(color);
     setQty(qty);
     setPrice(price);
     }
 
 
-    public void setSku(Integer sku) {
+    public void setSku(int sku) {
         this.sku = sku;
     }
 
-    public Integer getSku() {
+    public int getSku() {
         return sku;
     }
 
@@ -56,27 +63,36 @@ public class MakeUp {
         return type;
     }
 
-    public void setSectionOfFace(String sectionOfFace) {
-        this.sectionOfFace = sectionOfFace;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getSectionOfFace() {
-        return sectionOfFace;
+    public String getColor() {
+        return color;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 
-    public Integer getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString(){
+        return "SKU: " + this.getSku() + " Name: " + this.getName() +
+                " Brand: " + this.getBrand() + " Type: " + this.getType() +
+                " Color: " + this.getColor() + " Quantity: " + this.getQty() +
+                " Price: " + this.getPrice();
+    }
+
 }
